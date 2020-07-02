@@ -7,3 +7,5 @@ yarn-error.log
 *.css.map
 *.sass.map
 *.scss.map
+*.d.scss
+*.css

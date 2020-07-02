@@ -1,7 +1,6 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import reducers from '../reducers/index';
 
-export const store = createStore(reducers, 
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const store = createStore(reducers, composeWithDevTools(
+    applyMiddleware()));
