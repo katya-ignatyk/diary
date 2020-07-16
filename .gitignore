@@ -1,5 +1,6 @@
 dist/
 node_modules/
+.vscode
 npm-error.log
 yarn-error.log
 

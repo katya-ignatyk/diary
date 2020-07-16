@@ -18,7 +18,12 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json'],
     },
-
+    devServer: {
+      historyApiFallback: true,
+      port: 3000,
+      hot: true,
+      watchContentBase: true,
+    },
     module: {
       rules: [
         {

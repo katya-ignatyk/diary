@@ -1,0 +1,112 @@
+.signUpForm-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: auto;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+  .form-image {
+    flex-basis: 70%;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .signUp-form {
+    background-color: rgb(247, 242, 238);
+    display: flex;
+    flex-basis: 30%;
+    flex-direction: column;
+
+    .form-title {
+      margin: 0 auto;
+    }
+
+    form {
+      margin: auto;
+      .form-group {
+        max-width: 70%;
+        label {
+          display: block;
+          color: #d4bea4;
+          font-size: 18px;
+          margin: 5px 0;
+        }
+        .form-input {
+          background-color: transparent;
+          border-width: 0 0 2px;
+          border-color: rgb(129, 129, 129);
+          outline: none;
+          font-size: 17px;
+          color: rgb(153, 148, 148);
+          font-weight: bold;
+          padding: 12px 20px;
+        }
+
+        .invalid-feedback {
+          min-height: 40px;
+          width: 100%;
+          color: rgb(243, 104, 104);
+        }
+      }
+      .form-button {
+        display: block;
+        background-color: transparent;
+        outline: none;
+        width: 200px;
+        padding: 7px;
+        border: 1px solid rgb(129, 129, 129);
+        color: #887c6d;
+        font-weight: bold;
+        border-radius: 5px;
+        margin: 20px auto;
+        &:hover {
+          background-color: #887c6d;
+          color: rgb(255, 255, 255);
+          transition: 0.5s;
+        }
+      }
+
+      .loader {
+        width: 100%;
+        min-height: 100px;
+        text-align: center;
+        .bubble {
+          display: inline-block;
+          padding: 0px 5px;
+
+          @for $i from 1 to 3 {
+            &:nth-of-type(#{$i}) .circle {
+              animation-delay: $i * 0.1s;
+            }
+          }
+
+          .circle {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: rgb(189, 165, 152);
+            animation: pulse 1.5s infinite;
+            box-shadow: 0px 0px 8px rgba(202, 171, 145, 0.5);
+          }
+        }
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(0.2);
+            opacity: 0.75;
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+
+  .notification-wrapper {
+  }
+}
