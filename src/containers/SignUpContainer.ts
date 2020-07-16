@@ -1,21 +1,20 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { fetchUser, startLoader, stopLoader } from '../redux/actions/user/index'
 import SignUpForm from '../components/SignUpForm';
+import { IUserRegistrationData } from 'components/SignUpForm/interfaces';
+import { startLoader } from '../redux/actions/loader';
+import { fetchUser } from '../redux/actions/user';
 import { IRootState } from '../interfaces';
-import { IUser } from 'components/SignUpForm/interfaces';
 
-
-const mapStateToProps = (state: IRootState) => ({
-  isVerifyEmailSend: state.user.isVerifyEmailSend,
-  isEmailExists: state.user.isEmailExists,
-  isLoaderActive: state.user.isLoaderActive
+const mapStateToProps = (state : IRootState) => ({
+  isLoaderActive: state.loader.isLoaderActive,
+  isSuccessNotification: state.notifications.isSuccessNotification, 
+  isErrorNotification: state.notifications.isErrorNotification
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchUser: (userData: IUser) => fetchUser(userData)(dispatch),
-  startLoader: () => dispatch(startLoader()),
-  stopLoader: () => dispatch(stopLoader())
-})
+const mapDispatchToProps = (dispatch : Dispatch) => ({
+  fetchUser: (userData : IUserRegistrationData) => fetchUser(userData)(dispatch),
+  startLoader: () => dispatch(startLoader())
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);

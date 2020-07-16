@@ -12,6 +12,7 @@ module.exports = (env, argv) => {
     output: {
       filename: 'main.js',
       path: __dirname + '/dist',
+      publicPath: "/",
     },
     devtool: 'source-map',
 

@@ -1,15 +1,11 @@
 declare namespace StylesCssNamespace {
   export interface IStylesCss {
-    bubble: string;
-    circle: string;
     'form-button': string;
     'form-group': string;
     'form-image': string;
     'form-input': string;
     'form-title': string;
     'invalid-feedback': string;
-    loader: string;
-    pulse: string;
     'signUp-form': string;
     'signUpForm-wrapper': string;
   }

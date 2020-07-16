@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import UserReducer from './user';
+import NotificationReducer from './notifications';
+import LoaderReducer from './loader';
 
 const reducers = combineReducers({
-  user: UserReducer
-})
+  notifications: NotificationReducer,
+  loader: LoaderReducer
+});
 
 export default reducers;

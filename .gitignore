@@ -10,3 +10,4 @@ yarn-error.log
 *.scss.map
 *.d.scss
 *.css
+*.css.d.ts

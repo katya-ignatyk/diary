@@ -1,14 +1,13 @@
-export interface IUser {
-  username: string;
-  email: string;
-  password: string
+export interface IUserRegistrationData {
+  username : string;
+  email : string;
+  password : string;
 }
 
-export interface IReduxProps {
-  isVerifyEmailSend: boolean;
-  isEmailExists: boolean;
-  isLoaderActive: boolean;
-  fetchUser: (values: IUser) => void;
-  startLoader: () => void,
-  stopLoader: () => void
+export interface IUserRegistrationReduxProps {
+  isLoaderActive : boolean;
+  isSuccessNotification : boolean, 
+  isErrorNotification : boolean
+  fetchUser : (values : IUserRegistrationData) => void;
+  startLoader : () => void;
 }

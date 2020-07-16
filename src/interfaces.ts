@@ -1,10 +1,12 @@
 import { Action } from 'redux';
-import { IUserRegistrationState } from './redux/reducers/user/interfaces';
+import { INotificationsState } from './redux/reducers/notifications/interfaces';
+import { ILoaderState } from './redux/reducers/loader/interfaces';
 
 export interface IAction<T, S> extends Action<T> {
-  payload: S
+  payload : S;
 }
 
 export interface IRootState {
-  user: IUserRegistrationState
+  notifications : INotificationsState
+  loader : ILoaderState
 }
