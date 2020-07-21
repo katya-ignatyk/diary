@@ -39,6 +39,6 @@ export class HttpService {
   }
 
   private static sendRequest<T>(url : string, body : T) {
-    return fetch(url, body).catch(err => console.log(err));
+    return fetch(url, body);
   }
 }

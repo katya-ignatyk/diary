@@ -10,53 +10,53 @@ import { IUserRegistrationData, IUserRegistrationReduxProps } from './interfaces
 function InnerForm(props : IUserRegistrationReduxProps & FormikProps<IUserRegistrationData>) {
   const { handleSubmit, handleChange, values, touched, errors, isLoaderActive, isErrorNotification, isSuccessNotification } = props;
   return (
-    <div className={styles['signUpForm-wrapper']}>
-      <div className={styles['form-image']}>
-        <img src={newspaperImage} alt="Newspaper image" />
+    <div className={styles['signUp__wrapper']}>
+      <div className={styles['signUp__image-wrapper']}>
+        <img className={styles['signUp__image']} src={newspaperImage} alt="Newspaper image" />
       </div>
-      <div className={styles['signUp-form']}>
-        <div className={styles['form-title']}>
+      <div className={styles['signUp-form__wrapper']}>
+        <div className={styles['signUp-form__title']}>
           <h1>Sign Up</h1>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className={styles['form-group']}>
-            <label htmlFor="email">Email</label>
+        <form className={styles['signUp-form']} onSubmit={handleSubmit}>
+          <div className={styles['signUp-form-group__wrapper']}>
+            <label className={styles['signUp-form-group__label']} htmlFor="email">Email</label>
             <input
               id="email"
               name="email"
               type="text"
-              className={styles['form-input']}
+              className={styles['signUp-form-group__input']}
               onChange={handleChange}
               value={values.email}
             />
-            <div className={styles['invalid-feedback']}>{touched.email && errors.email && errors.email}</div>
+            <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.email && errors.email && errors.email}</div>
           </div>
-          <div className={styles['form-group']}>
-            <label htmlFor="username">Username</label>
+          <div className={styles['signUp-form-group__wrapper']}>
+            <label className={styles['signUp-form-group__label']} htmlFor="username">Username</label>
             <input
               id="username"
               name="username"
               type="text"
-              className={styles['form-input']}
+              className={styles['signUp-form-group__input']}
               onChange={handleChange}
               value={values.username}
             />
-            <div className={styles['invalid-feedback']}>{touched.username && errors.username && errors.username}</div>
+            <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.username && errors.username && errors.username}</div>
           </div>
-          <div className={styles['form-group']}>
-            <label htmlFor="password">Password</label>
+          <div className={styles['signUp-form-group__wrapper']}>
+            <label className={styles['signUp-form-group__label']} htmlFor="password">Password</label>
             <input
               id="password"
               name="password"
               type="password"
-              className={styles['form-input']}
+              className={styles['signUp-form-group__input']}
               onChange={handleChange}
               value={values.password}
             />
-            <div className={styles['invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
+            <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
           </div>
           {!isLoaderActive && (
-            <button type="submit" className={styles['form-button']} disabled = {isSuccessNotification ? true : false}>
+            <button type="submit" className={styles['signUp-form__button']} disabled = {isSuccessNotification ? true : false}>
               Sign Up
             </button>) ||
             <Loader />}
@@ -81,7 +81,7 @@ const SignUpForm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData
     username: Yup.string().min(3, 'Username must be at least 3 characters').max(20).required('Username is required'),
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
   }),
-  handleSubmit: (values : IUserRegistrationData & IUserRegistrationReduxProps, { resetForm }) => {
+  handleSubmit: (values : IUserRegistrationData & IUserRegistrationReduxProps) => {
     const { username, email, password } = values;
     values.fetchUser({ username, email, password });
     values.startLoader();

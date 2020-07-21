@@ -6,4 +6,4 @@ const mapStateToProps = (state : IRootState) => ({
   notificationText: state.notifications.notificationText
 });
 
-export default connect(mapStateToProps, null)(Notification);
+export default connect(mapStateToProps)(Notification);

@@ -10,7 +10,7 @@ const initialState = {
   notificationText: ''
 };
 
-export default function NotificationReducer (state = initialState, action : INotification) {
+export default function NotificationReducer(state = initialState, action : INotification) {
   switch (action.type) {
     case NotificationsActionTypes.SEND_SUCCESS_NOTIFICATION: {
       return {

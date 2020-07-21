@@ -2,14 +2,14 @@ import { NotificationsActionTypes } from '../../reducers/notifications/interface
 import { ISendErrorNnotification, ISendSuccessNnotification } from './interfaces';
 
 export const sendSuccessNotification = (text : string) : ISendSuccessNnotification => {
-  return{
+  return {
     type: NotificationsActionTypes.SEND_SUCCESS_NOTIFICATION,
-    payload:text
+    payload: text
   };
 };
 
 export const sendErrorNotification = (text : string) : ISendErrorNnotification => {
-  return{
+  return {
     type: NotificationsActionTypes.SEND_ERROR_NOTIFICATION,
     payload: text
   };

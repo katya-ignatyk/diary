@@ -14,7 +14,23 @@
     "build": "webpack --mode production --config webpack.config.js",
     "start": "webpack-dev-server --mode development --config webpack.config.js --open",
     "dev": "npm-run-all -p watch:css start",
-    "lint": "eslint src/**/*.ts --fix"
+    "lint": "eslint src/**/*.ts --fix",
+    "slint": "stylelint \"./src/**/*.scss\" --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,ts,tsx}": [
+        "eslint --fix"
+      ],
+      "*.{scss, css}": [
+       "stylelint --fix"
+      ]
+    }
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -51,8 +67,10 @@
     "eslint-plugin-react": "^7.20.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.0",
+    "husky": "^4.2.5",
     "image-webpack-loader": "^6.0.0",
     "img-loader": "^3.0.1",
+    "lint-staged": "^10.2.11",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "npm-run-all": "^4.1.5",
@@ -63,6 +81,8 @@
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.3",
+    "stylelint": "^13.6.1",
+    "stylelint-config-sass-guidelines": "^7.0.0",
     "terser-webpack-plugin": "^3.0.6",
     "ts-loader": "^6.2.2",
     "typesafe-actions": "^5.1.0",
