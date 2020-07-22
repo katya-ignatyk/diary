@@ -1,5 +1,5 @@
 import { NotificationsActionTypes } from '../../reducers/notifications/interfaces';
 import { IAction } from '../../../interfaces';
+import { INotificationState } from '../../reducers/notifications/interfaces';
 
-export type ISendErrorNnotification = IAction<NotificationsActionTypes.SEND_ERROR_NOTIFICATION, String>
-export type ISendSuccessNnotification = IAction<NotificationsActionTypes.SEND_SUCCESS_NOTIFICATION, String>
+export type ISendNnotification = IAction<NotificationsActionTypes.SEND_NOTIFICATION, INotificationState>

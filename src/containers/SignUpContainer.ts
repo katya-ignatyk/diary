@@ -7,9 +7,7 @@ import { fetchUser } from '../redux/actions/user';
 import { IRootState } from '../interfaces';
 
 const mapStateToProps = (state : IRootState) => ({
-  isLoaderActive: state.loader.isLoaderActive,
-  isSuccessNotification: state.notifications.isSuccessNotification, 
-  isErrorNotification: state.notifications.isErrorNotification
+  isLoaderActive: state.loader.isLoaderActive
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) => ({

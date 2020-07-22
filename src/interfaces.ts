@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { INotificationsState } from './redux/reducers/notifications/interfaces';
+import { INotificationState } from './redux/reducers/notifications/interfaces';
 import { ILoaderState } from './redux/reducers/loader/interfaces';
 
 export interface IAction<T, S> extends Action<T> {
@@ -7,6 +7,6 @@ export interface IAction<T, S> extends Action<T> {
 }
 
 export interface IRootState {
-  notifications : INotificationsState
+  notifications : INotificationState[]
   loader : ILoaderState
 }

@@ -73,16 +73,6 @@
           color: rgb(255, 255, 255);
           transition: 0.5s;
         }
-
-        &:disabled {
-          background-color: inherit;
-          cursor: default;
-          
-          &:hover {
-            background-color: inherit;
-            color: #887c6d;
-          }
-        }
       }
     }
   }

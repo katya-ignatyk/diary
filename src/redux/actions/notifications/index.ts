@@ -1,16 +1,16 @@
-import { NotificationsActionTypes } from '../../reducers/notifications/interfaces';
-import { ISendErrorNnotification, ISendSuccessNnotification } from './interfaces';
+import { NotificationsActionTypes, INotificationState } from '../../reducers/notifications/interfaces';
+import { ISendNnotification } from './interfaces';
 
-export const sendSuccessNotification = (text : string) : ISendSuccessNnotification => {
+export const sendNotification = (notificationInfo : INotificationState) : ISendNnotification => {
   return {
-    type: NotificationsActionTypes.SEND_SUCCESS_NOTIFICATION,
-    payload: text
+    type: NotificationsActionTypes.SEND_NOTIFICATION,
+    payload: notificationInfo
   };
 };
 
-export const sendErrorNotification = (text : string) : ISendErrorNnotification => {
+export const deleteNotification = (index : number) => {
   return {
-    type: NotificationsActionTypes.SEND_ERROR_NOTIFICATION,
-    payload: text
+    type: NotificationsActionTypes.DELETE_NOTIFICATION,
+    payload: index
   };
 };

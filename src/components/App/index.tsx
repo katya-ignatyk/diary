@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignUpForm from '../../containers/SignUpContainer';
 import VerifyForm from '../../containers/VerifyFormContainer';
+import Notification from '../../containers/NotificationsContainer';
 import styles from './styles.css';
 
 function App() {
   return (
     <div className={styles.wrapper}>
-      <BrowserRouter>
+      <Router>
         <Switch>
           <Route exact path='/signUp' component={SignUpForm}/>
           <Route exact path='/signUp/verify' component={VerifyForm}/>                
         </Switch>
-      </BrowserRouter>
+      </Router>
+      <Notification />
     </div> 
   );
 }

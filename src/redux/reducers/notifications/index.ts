@@ -1,26 +1,20 @@
 import { ActionType } from 'typesafe-actions';
 import * as actions from '../../actions/notifications';
-import { NotificationsActionTypes } from './interfaces';
+import { NotificationsActionTypes, INotificationState } from './interfaces';
 
-type INotification = ActionType<typeof actions>
+type INotificationAction = ActionType<typeof actions>
 
-const initialState = {
-  isSuccessNotification: false,
-  isErrorNotification: false,
-  notificationText: ''
-};
+const initialState : INotificationState[] = [];
 
-export default function NotificationReducer(state = initialState, action : INotification) {
+export default function NotificationReducer(state = initialState, action : INotificationAction) {
   switch (action.type) {
-    case NotificationsActionTypes.SEND_SUCCESS_NOTIFICATION: {
-      return {
-        ...state, notificationText: action.payload, isSuccessNotification: true, isErrorNotification: false
-      };
+    case NotificationsActionTypes.SEND_NOTIFICATION: {
+      return [
+        ...state, action.payload
+      ];
     }
-    case NotificationsActionTypes.SEND_ERROR_NOTIFICATION: {
-      return {
-        ...state, notificationText: action.payload, isSuccessNotification: false, isErrorNotification: true
-      };
+    case NotificationsActionTypes.DELETE_NOTIFICATION: {
+      return state.filter((element, index) => index !== action.payload);
     }
     default: return state;
   }

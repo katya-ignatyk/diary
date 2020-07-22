@@ -6,8 +6,6 @@ export interface IUserRegistrationData {
 
 export interface IUserRegistrationReduxProps {
   isLoaderActive : boolean;
-  isSuccessNotification : boolean, 
-  isErrorNotification : boolean
   fetchUser : (values : IUserRegistrationData) => void;
   startLoader : () => void;
 }

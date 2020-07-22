@@ -23,14 +23,12 @@
     }
   },
   "lint-staged": {
-    "linters": {
       "*.{js,ts,tsx}": [
         "eslint --fix"
       ],
       "*.{scss, css}": [
        "stylelint --fix"
       ]
-    }
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",

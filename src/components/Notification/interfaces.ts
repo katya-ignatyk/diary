@@ -1,9 +1,6 @@
-import { Color } from "@material-ui/lab/Alert";
+import { INotificationState } from '../../redux/reducers/notifications/interfaces';
 
 export interface INotificationReduxProps{
-  notificationText : string
-}
-
-export interface INotificationProps {
-  severity : Color
+  notifications : INotificationState[]
+  deleteNotification : (index : number) => void
 }

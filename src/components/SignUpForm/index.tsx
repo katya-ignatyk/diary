@@ -2,13 +2,12 @@ import * as React from 'react';
 import * as Yup from 'yup';
 import { withFormik, FormikProps } from 'formik';
 import newspaperImage from '../../assets/img/newspaper.jpg';
-import Notification from '../../containers/NotificationsContainer';
 import Loader from '../Loader';
 import styles from './styles.css';
 import { IUserRegistrationData, IUserRegistrationReduxProps } from './interfaces';
 
 function InnerForm(props : IUserRegistrationReduxProps & FormikProps<IUserRegistrationData>) {
-  const { handleSubmit, handleChange, values, touched, errors, isLoaderActive, isErrorNotification, isSuccessNotification } = props;
+  const { handleSubmit, handleChange, values, touched, errors, isLoaderActive } = props;
   return (
     <div className={styles['signUp__wrapper']}>
       <div className={styles['signUp__image-wrapper']}>
@@ -56,13 +55,11 @@ function InnerForm(props : IUserRegistrationReduxProps & FormikProps<IUserRegist
             <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
           </div>
           {!isLoaderActive && (
-            <button type="submit" className={styles['signUp-form__button']} disabled = {isSuccessNotification ? true : false}>
+            <button type="submit" className={styles['signUp-form__button']}>
               Sign Up
             </button>) ||
             <Loader />}
         </form>
-        {isErrorNotification && !isLoaderActive && <Notification severity={'error'}/>}
-        {isSuccessNotification && !isLoaderActive && <Notification severity={'success'} />}
       </div>
     </div>
   );

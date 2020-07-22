@@ -1,9 +1,15 @@
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { IRootState } from '../interfaces';
+import { deleteNotification } from '../redux/actions/notifications/index';
 import Notification from '../components/Notification';
 
 const mapStateToProps = (state : IRootState) => ({
-  notificationText: state.notifications.notificationText
+  notifications: state.notifications
 });
 
-export default connect(mapStateToProps)(Notification);
+const mapDispatchToProps = (dispatch : Dispatch) => ({
+  deleteNotification: (index : number) => dispatch(deleteNotification(index))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notification);
