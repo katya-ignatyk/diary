@@ -12,8 +12,9 @@
     "build:css": "node-sass src/ -o src/ ",
     "watch:css": "npm run build:css && node-sass src/ -o src/ -w -r",
     "build": "webpack --mode production --config webpack.config.js",
-    "start": "webpack-dev-server --mode development --config webpack.config.js --open",
-    "dev": "npm-run-all -p watch:css start",
+    "start:dev": "webpack-dev-server --mode development --config webpack.config.js --open",
+    "start":"node server.js",
+    "dev": "npm-run-all -p watch:css start:dev",
     "lint": "eslint src/**/*.ts --fix",
     "slint": "stylelint \"./src/**/*.scss\" --fix"
   },

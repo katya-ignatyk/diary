@@ -6,7 +6,7 @@ export enum NotificationsActionTypes{
 }
 
 export interface INotificationState {
-  severity : Color,
-  message : string,
-  time : number
+  severity : Color;
+  message : string;
+  time : number;
 }

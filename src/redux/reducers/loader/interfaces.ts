@@ -4,5 +4,5 @@ export enum LoaderActionTypes {
 }
 
 export interface ILoaderState{
-  isLoaderActive : boolean
+  isLoaderActive : boolean;
 }

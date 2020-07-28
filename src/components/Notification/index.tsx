@@ -1,6 +1,6 @@
-import React from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
+import * as React from 'react';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
 import { INotificationReduxProps } from './interfaces';
 
 function Alert(props : AlertProps) {
@@ -10,7 +10,8 @@ function Alert(props : AlertProps) {
 const styles = (index : number) : React.CSSProperties => ({
   position: 'absolute',
   bottom: 50 * index + 'px',
-  left: 150 + 'px'
+  left: 0,
+  transform: 'translateX(0%)',
 });
 
 function Notification(props : INotificationReduxProps) {
@@ -23,19 +24,24 @@ function Notification(props : INotificationReduxProps) {
     deleteNotification(index);
   }
   
-  return notifications.map((notification, index) => (
-    <Snackbar
-      style={styles(index)}
-      onClose={(event : React.SyntheticEvent, reason : string) => handleClose(index, reason)}
-      open={true}
-      autoHideDuration={notification.time}
-      key={index + (new Date()).toString()}
-      //is there other way to generate unique key?
-    >
-      <Alert onClose={() => handleClose(index)} severity={notification.severity}>
-        {notification.message}
-      </Alert>
-    </Snackbar>));
-  }
+  return (
+    <>
+      {notifications.map((notification, index) => (
+        <Snackbar
+          style={styles(index)}
+          onClose={(event : React.SyntheticEvent, reason : string) => handleClose(index, reason)}
+          open={true}
+          autoHideDuration={notification.time}
+          key={index + (new Date()).toString()}
+          //is there other way to generate unique key?
+        >
+          <Alert onClose={() => handleClose(index)} severity={notification.severity}>
+            {notification.message}
+          </Alert>
+        </Snackbar>))
+        }
+    </>
+  );
+}
 
 export default Notification;

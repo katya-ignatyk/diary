@@ -1,7 +1,6 @@
 import { LoaderActionTypes } from '../../reducers/loader/interfaces';
 import { IStartLoader, IStopLoader } from './interfaces';
 
-
 export const startLoader = () : IStartLoader => {
   return {
     type: LoaderActionTypes.START_LOADER,

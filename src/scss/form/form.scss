@@ -1,43 +1,52 @@
-.signUp__wrapper {
+.form__container {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   display: flex;
   justify-content: center;
   margin: auto;
   width: 70%;
 
-  .signUp__image-wrapper { 
+  .form__image-wrapper { 
     flex-basis: 70%;
 
-    .signUp__image {
+    .form__image {
       height: 100%;
       width: 100%;
     }
   }
 
-  .signUp-form__wrapper {
+  .form__wrapper {
     background-color: rgb(247, 242, 238);
     display: flex;
     flex-basis: 30%;
     flex-direction: column;
+    justify-content: space-around;
 
-    .signUp-form__title {
+    .form__title {
       margin: 0 auto;
     }
 
-    .signUp-form {
+    .form__text {
+      align-self: center;
+      color: rgb(153, 148, 148);
+      line-height: 2;
+      max-width: 70%;
+      text-align: center;
+    }
+
+    .form {
       margin: auto;
 
-      .signUp-form-group__wrapper {
+      .form-group__wrapper {
         max-width: 70%;
 
-        .signUp-form-group__label {
+        .form-group__label {
           color: #d4bea4;
           display: block;
           font-size: 18px;
           margin: 5px 0;
         }
 
-        .signUp-form-group__input {
+        .form-group__input {
           background-color: transparent;
           border-color: rgb(129, 129, 129);
           border-width: 0 0 2px;
@@ -48,30 +57,10 @@
           padding: 12px 20px;
         }
 
-        .signUp-form-group__input__invalid-feedback {
+        .form-group__input__invalid-feedback {
           color: rgb(243, 104, 104);
           min-height: 40px;
           width: 100%;
-        }
-      }
-
-      .signUp-form__button {
-        background-color: transparent;
-        border: 1px solid rgb(129, 129, 129);
-        border-radius: 5px;
-        color: #887c6d;
-        cursor: pointer;
-        display: block;
-        font-weight: bold;
-        margin: 20px auto;
-        outline: none;
-        padding: 7px;
-        width: 200px;
-
-        &:hover {
-          background-color: #887c6d;
-          color: rgb(255, 255, 255);
-          transition: 0.5s;
         }
       }
     }

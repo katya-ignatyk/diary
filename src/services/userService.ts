@@ -15,7 +15,7 @@ export class UserService {
     return HttpService.post(url, userData);
   }
 
-  public verifyAccessToken(url : string, body : {token : string}) {
+  public verifyAccessToken(url : string, body : {token : string,}) {
     return HttpService.post(url, body);
   }
 }

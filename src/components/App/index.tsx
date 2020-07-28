@@ -4,18 +4,22 @@ import SignUpForm from '../../containers/SignUpContainer';
 import VerifyForm from '../../containers/VerifyFormContainer';
 import Notification from '../../containers/NotificationsContainer';
 import styles from './styles.css';
+import Header from '../Header';
 
 function App() {
   return (
-    <div className={styles.wrapper}>
-      <Router>
-        <Switch>
-          <Route exact path='/signUp' component={SignUpForm}/>
-          <Route exact path='/signUp/verify' component={VerifyForm}/>                
-        </Switch>
-      </Router>
-      <Notification />
-    </div> 
+    <>
+      <Header />
+      <main className={styles.main}>
+        <Router>
+          <Switch>
+            <Route exact path='/signUp' component={SignUpForm}/>
+            <Route exact path='/signUp/verify' component={VerifyForm}/>        
+          </Switch>
+        </Router>
+        <Notification />
+      </main> 
+    </>
   );
 }
 

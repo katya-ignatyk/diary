@@ -1,61 +1,62 @@
 import * as React from 'react';
 import * as Yup from 'yup';
 import { withFormik, FormikProps } from 'formik';
-import newspaperImage from '../../assets/img/newspaper.jpg';
-import Loader from '../Loader';
-import styles from './styles.css';
 import { IUserRegistrationData, IUserRegistrationReduxProps } from './interfaces';
+import Loader from '../Loader';
+import newspaperImage from '../../assets/img/newspaper.jpg';
+import formStyles from '../../scss/form/form.css';
+import buttonStyles from '../../scss/button/button.css';
 
 function InnerForm(props : IUserRegistrationReduxProps & FormikProps<IUserRegistrationData>) {
   const { handleSubmit, handleChange, values, touched, errors, isLoaderActive } = props;
   return (
-    <div className={styles['signUp__wrapper']}>
-      <div className={styles['signUp__image-wrapper']}>
-        <img className={styles['signUp__image']} src={newspaperImage} alt="Newspaper image" />
+    <div className={formStyles['form__container']}>
+      <div className={formStyles['form__image-wrapper']}>
+        <img className={formStyles['form__image']} src={newspaperImage} alt="Newspaper image" />
       </div>
-      <div className={styles['signUp-form__wrapper']}>
-        <div className={styles['signUp-form__title']}>
+      <div className={formStyles['form__wrapper']}>
+        <div className={formStyles['form__title']}>
           <h1>Sign Up</h1>
         </div>
-        <form className={styles['signUp-form']} onSubmit={handleSubmit}>
-          <div className={styles['signUp-form-group__wrapper']}>
-            <label className={styles['signUp-form-group__label']} htmlFor="email">Email</label>
+        <form className={formStyles['form']} onSubmit={handleSubmit}>
+          <div className={formStyles['form-group__wrapper']}>
+            <label className={formStyles['form-group__label']} htmlFor="email">Email</label>
             <input
               id="email"
               name="email"
               type="text"
-              className={styles['signUp-form-group__input']}
+              className={formStyles['form-group__input']}
               onChange={handleChange}
               value={values.email}
             />
-            <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.email && errors.email && errors.email}</div>
+            <div className={formStyles['form-group__input__invalid-feedback']}>{touched.email && errors.email && errors.email}</div>
           </div>
-          <div className={styles['signUp-form-group__wrapper']}>
-            <label className={styles['signUp-form-group__label']} htmlFor="username">Username</label>
+          <div className={formStyles['form-group__wrapper']}>
+            <label className={formStyles['form-group__label']} htmlFor="username">Username</label>
             <input
               id="username"
               name="username"
               type="text"
-              className={styles['signUp-form-group__input']}
+              className={formStyles['form-group__input']}
               onChange={handleChange}
               value={values.username}
             />
-            <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.username && errors.username && errors.username}</div>
+            <div className={formStyles['form-group__input__invalid-feedback']}>{touched.username && errors.username && errors.username}</div>
           </div>
-          <div className={styles['signUp-form-group__wrapper']}>
-            <label className={styles['signUp-form-group__label']} htmlFor="password">Password</label>
+          <div className={formStyles['form-group__wrapper']}>
+            <label className={formStyles['form-group__label']} htmlFor="password">Password</label>
             <input
               id="password"
               name="password"
               type="password"
-              className={styles['signUp-form-group__input']}
+              className={formStyles['form-group__input']}
               onChange={handleChange}
               value={values.password}
             />
-            <div className={styles['signUp-form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
+            <div className={formStyles['form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
           </div>
           {!isLoaderActive && (
-            <button type="submit" className={styles['signUp-form__button']}>
+            <button type="submit" className={buttonStyles['form__button']}>
               Sign Up
             </button>) ||
             <Loader />}
@@ -65,7 +66,7 @@ function InnerForm(props : IUserRegistrationReduxProps & FormikProps<IUserRegist
   );
 }
 
-const SignUpForm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData>({
+const orm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData>({
   mapPropsToValues: (props) => ({
     username: '',
     email: '',
@@ -85,4 +86,4 @@ const SignUpForm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData
   },
 })(InnerForm);
 
-export default SignUpForm;
+export default orm;

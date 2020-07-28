@@ -1,3 +1,5 @@
-export interface IVerifyReduxProps{
-  verifyUser : (token : string) => void
+export interface IVerifyReduxProps { 
+  isLoaderActive : boolean;
+  startLoader : () => void;
+  verifyUser : (token : string) => Promise<boolean>;
 }
