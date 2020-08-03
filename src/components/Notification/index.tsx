@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import { INotificationReduxProps } from './interfaces';
@@ -14,32 +15,32 @@ const styles = (index : number) : React.CSSProperties => ({
   transform: 'translateX(0%)',
 });
 
-function Notification(props : INotificationReduxProps) {
+function Notification(props : INotificationReduxProps) {   
   const { notifications, deleteNotification } = props;
 
-  function handleClose(index : number, reason ?: string) {
-    if (reason === 'clickaway') {
-      return;
-    }
-    deleteNotification(index);
-  }
+  const handleClose = React.useCallback((event : React.SyntheticEvent, reason ?: string) => {
+    console.log("object");
+      if (reason === 'clickaway') {
+        return;
+      }
+      deleteNotification(0);
+  }, []);
   
   return (
     <>
       {notifications.map((notification, index) => (
         <Snackbar
           style={styles(index)}
-          onClose={(event : React.SyntheticEvent, reason : string) => handleClose(index, reason)}
+          onClose = {handleClose}
           open={true}
           autoHideDuration={notification.time}
-          key={index + (new Date()).toString()}
-          //is there other way to generate unique key?
+          key={uuidv4()}
         >
-          <Alert onClose={() => handleClose(index)} severity={notification.severity}>
+          <Alert onClose={handleClose} severity={notification.severity}>
             {notification.message}
           </Alert>
-        </Snackbar>))
-        }
+        </Snackbar>)
+      )}
     </>
   );
 }
