@@ -23,11 +23,12 @@ export const fetchUser = (userData : IUserRegistrationData) => async(dispatch : 
 
   if (status === 201) {
     dispatch(stopLoader());
-    dispatch(sendNotification({ severity: 'success' , message: jsonResponse.message, time: 1000 }));
+    dispatch(sendNotification({ severity: 'success' , message: jsonResponse.message, time: 5000 }));
   }
+
   if (status === 409 || status === 400) {
     dispatch(stopLoader());
-    dispatch(sendNotification({ severity: 'error' , message: jsonResponse.message, time: 1000 }));
+    dispatch(sendNotification({ severity: 'error' , message: jsonResponse.message, time: 5000 }));
   }
 };
 
@@ -35,16 +36,18 @@ export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
   const response = await UserService.Instance.verifyAccessToken(`${config.BE_URL}/signUp/verify`, { token });
   const status = await response.status;
   const jsonResponse = await response.json();
+
   if (status === 200) {
     dispatch(stopLoader());
-    dispatch(sendNotification({ severity: 'success' , message: jsonResponse.message, time: 1000 }));
+    dispatch(sendNotification({ severity: 'success' , message: jsonResponse.message, time: 5000 }));
     dispatch(saveUser(jsonResponse.user));
     StorageService.setAccessToken(jsonResponse.accessToken);
     StorageService.setRefreshToken(jsonResponse.refreshToken);
     return true;
   }
+
   if (status === 401) {
     dispatch(stopLoader());
-    dispatch(sendNotification({ severity: 'error' , message: jsonResponse.message, time: 1000 }));
+    dispatch(sendNotification({ severity: 'error' , message: jsonResponse.message, time: 5000 }));
   }
 };

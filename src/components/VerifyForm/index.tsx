@@ -14,19 +14,17 @@ function VerifyForm(props : IVerifyReduxProps) {
   const parsed = queryString.parse(location.search);
   const token = parsed.token;
 
-  const handleClick = () : void => {
-    console.log(props);
+  const handleClick = React.useCallback(() => {
     startLoader();
     if (!token || typeof token !== "string"){
       return null;
     }
-    props.verifyUser(token)
-    .then((resolved : boolean) => { 
+    props.verifyUser(token).then((resolved : boolean) => { 
       if (resolved) {
         history.push('/'); 
       }
     });
-  };
+  }, []);
 
   return (
     <div className={formStyles['form__container']}>

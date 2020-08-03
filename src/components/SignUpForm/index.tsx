@@ -66,7 +66,7 @@ function InnerForm(props : IUserRegistrationReduxProps & FormikProps<IUserRegist
   );
 }
 
-const orm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData>({
+const SignUpForm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData>({
   mapPropsToValues: (props) => ({
     username: '',
     email: '',
@@ -83,7 +83,7 @@ const orm = withFormik<IUserRegistrationReduxProps, IUserRegistrationData>({
     const { username, email, password } = values;
     values.fetchUser({ username, email, password });
     values.startLoader();
-  },
+  }
 })(InnerForm);
 
-export default orm;
+export default SignUpForm;

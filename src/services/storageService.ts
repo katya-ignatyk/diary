@@ -7,11 +7,19 @@ export class StorageService {
     return localStorage.setItem('refreshToken', token);
   }
 
-  public static getAccessToken(key : string) {
-    return localStorage.getItem(key);
+  public static getAccessToken() {
+    return localStorage.getItem('accessToken');
   }
 
-  public static getRefreshToken(key : string) {
-    return localStorage.getItem(key);
+  public static getRefreshToken() {
+    return localStorage.getItem('refreshToken');
+  }
+
+  public static removeRefreshToken() {
+    return localStorage.removeItem('refreshToken');
+  }
+
+  public static removeAccessToken() {
+    return localStorage.removeItem('accessToken');
   }
 }
