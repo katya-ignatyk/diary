@@ -8,22 +8,21 @@ import buttonStyles from '../../scss/button/button.css';
 import { IVerifyReduxProps } from './interfaces';
 
 function VerifyForm(props : IVerifyReduxProps) {
-  const { startLoader, isLoaderActive } = props;
-  const location = useLocation();
   const history = useHistory();
+  const location = useLocation();
   const parsed = queryString.parse(location.search);
   const token = parsed.token;
+  const { startLoader, isLoaderActive } = props;
 
   const handleClick = () : void => {
-    console.log(props);
     startLoader();
     if (!token || typeof token !== "string"){
       return null;
     }
     props.verifyUser(token)
-    .then((resolved : boolean) => { 
+    .then((resolved : boolean | string) => { 
       if (resolved) {
-        history.push('/'); 
+        typeof(resolved) === 'string'? history.push('/forgotPassword') : history.push('/'); 
       }
     });
   };

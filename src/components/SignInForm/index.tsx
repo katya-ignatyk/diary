@@ -1,27 +1,27 @@
 import * as React from 'react';
 import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { IUserRegistrationReduxProps } from './interfaces';
+import { useFormik } from 'formik';
+import { IUserAuthData, IUserAuthReduxProps } from './interfaces';
 import Loader from '../Loader';
-import diary from '../../assets/img/diaryForSignUp.jpg';
-import formStyles from '../../scss/form/form.css';
+import diary from '../../assets/img/diaryForSignIn.jpg';
+import formStyles, { form } from '../../scss/form/form.css';
 import buttonStyles from '../../scss/button/button.css';
 
-function SignUpForm(props : IUserRegistrationReduxProps) {
+function SignInForm(props : IUserAuthReduxProps) {
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
-      username: '',
       email: '',
       password: '',
       fetchUser: props.fetchUser,
-      startLoader: props.startLoader,
+      startLoader: props.startLoader
     },
     onSubmit: values => {
-      const { username, email, password } = values;
+      const { email, password } = values;
       values.startLoader();
-      values.fetchUser({ username, email, password })    
+      values.fetchUser({ email, password })
       .then((resolved : boolean) => {
         if (resolved) {
           history.push('/home');
@@ -31,8 +31,7 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
     validationSchema: 
       Yup.object().shape({
         email: Yup.string().email('Email is invalid').required('Email is required'),
-        username: Yup.string().min(3, 'Username must be at least 3 characters').max(20).required('Username is required'),
-        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required')
+        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
       })
   });
   const { handleSubmit, handleChange, values, touched, errors } = formik;
@@ -40,11 +39,11 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
   return (
     <div className={formStyles['form__container']}>
       <div className={formStyles['form__image-wrapper']}>
-        <img className={formStyles['form__image']} src={diary} alt="Newspaper image" />
+        <img className={formStyles['form__image']} src={diary} alt="diary image" />
       </div>
       <div className={formStyles['form__wrapper']}>
         <div className={formStyles['form__title']}>
-          <h1>Sign Up</h1>
+          <h1>Sign In</h1>
         </div>
         <form className={formStyles['form']} onSubmit={handleSubmit}>
           <div className={formStyles['form-group__wrapper']}>
@@ -60,18 +59,6 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
             <div className={formStyles['form-group__input__invalid-feedback']}>{touched.email && errors.email && errors.email}</div>
           </div>
           <div className={formStyles['form-group__wrapper']}>
-            <label className={formStyles['form-group__label']} htmlFor="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              className={formStyles['form-group__input']}
-              onChange={handleChange}
-              value={values.username}
-            />
-            <div className={formStyles['form-group__input__invalid-feedback']}>{touched.username && errors.username && errors.username}</div>
-          </div>
-          <div className={formStyles['form-group__wrapper']}>
             <label className={formStyles['form-group__label']} htmlFor="password">Password</label>
             <input
               id="password"
@@ -81,17 +68,22 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
               onChange={handleChange}
               value={values.password}
             />
+            <div className={formStyles['form__forgot-password__wrapper']}>
+              <Link className={formStyles['form__forgot-password__link']} to='/forgotPassword'>Forgot password?</Link>
+            </div>
             <div className={formStyles['form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
           </div>
-          {!isLoaderActive && (
+          
+          <div>{!isLoaderActive && (
             <button type="submit" className={buttonStyles['form__button']}>
-              Sign Up
+              Sign In
             </button>) ||
-            <Loader />}
+            <Loader />
+          }</div>
         </form>
       </div>
     </div>
   );
 }
 
-export default SignUpForm;
+export default SignInForm;

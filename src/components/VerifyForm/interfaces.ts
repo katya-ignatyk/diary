@@ -3,3 +3,4 @@ export interface IVerifyReduxProps {
   startLoader : () => void;
   verifyUser : (token : string) => Promise<boolean>;
 }
+

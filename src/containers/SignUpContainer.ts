@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import SignUpForm from '../components/SignUpForm';
 import { IUserRegistrationData } from 'components/SignUpForm/interfaces';
 import { startLoader } from '../redux/actions/loader';
-import { fetchUser } from '../redux/actions/user';
+import { signUp } from '../redux/actions/user';
 import { IRootState } from '../interfaces';
 
 const mapStateToProps = (state : IRootState) => ({
@@ -11,7 +11,7 @@ const mapStateToProps = (state : IRootState) => ({
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) => ({
-  fetchUser: (userData : IUserRegistrationData) => fetchUser(userData)(dispatch),
+  fetchUser: (userData : IUserRegistrationData) => signUp(userData)(dispatch),
   startLoader: () => dispatch(startLoader())
 });
 

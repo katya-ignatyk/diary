@@ -10,7 +10,7 @@ function Header() {
             <a href="/signUp">Sign Up</a>
           </li>
           <li className={styles['menu__item']}>
-            <a href="/signIn">sign In</a>
+            <a href="/signIn">Sign In</a>
           </li>
         </nav>
       </header>
