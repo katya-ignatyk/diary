@@ -1,0 +1,23 @@
+{
+  "extends": ["stylelint-config-sass-guidelines"],
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "indentation": 2,
+    "rule-empty-line-before" : "always",
+    "string-quotes": "single",
+    "max-nesting-depth": null,
+    "selector-max-compound-selectors": null,
+    "selector-class-pattern": null,
+    "order/order": [
+			[
+				"custom-properties",
+				"declarations"
+			],
+			{
+				"disableFix": true
+			}
+    ]
+  }
+}

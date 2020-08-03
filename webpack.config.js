@@ -12,13 +12,19 @@ module.exports = (env, argv) => {
     output: {
       filename: 'main.js',
       path: __dirname + '/dist',
+      publicPath: "/",
     },
     devtool: 'source-map',
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json'],
     },
-
+    devServer: {
+      historyApiFallback: true,
+      port: 3000,
+      hot: true,
+      watchContentBase: true,
+    },
     module: {
       rules: [
         {

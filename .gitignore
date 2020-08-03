@@ -1,5 +1,6 @@
 dist/
 node_modules/
+.vscode
 npm-error.log
 yarn-error.log
 
@@ -9,3 +10,4 @@ yarn-error.log
 *.scss.map
 *.d.scss
 *.css
+*.css.d.ts

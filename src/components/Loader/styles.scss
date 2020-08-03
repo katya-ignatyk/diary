@@ -1,0 +1,41 @@
+.loader {
+  min-height: 100px;
+  text-align: center;
+  width: 100%;
+
+  .bubble {
+    display: inline-block;
+    padding: 0 5px;
+
+    @for $i from 1 to 3 {
+      &:nth-of-type(#{$i}) .circle {
+        animation-delay: $i * 0.1s;
+      }
+    }
+    
+    .circle {
+      animation: pulse 1.5s infinite;
+      background: rgb(189, 165, 152);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(202, 171, 145, 0.5);
+      height: 25px;
+      width: 25px;
+    }
+  }
+  
+  @keyframes pulse {
+
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.75;
+      transform: scale(0.2);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}

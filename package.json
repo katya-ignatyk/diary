@@ -12,45 +12,81 @@
     "build:css": "node-sass src/ -o src/ ",
     "watch:css": "npm run build:css && node-sass src/ -o src/ -w -r",
     "build": "webpack --mode production --config webpack.config.js",
-    "start": "webpack-dev-server --hot --port 3000 --open",
-    "dev": "npm-run-all -p watch:css start",
-    "lint": "eslint"
+    "start:dev": "webpack-dev-server --mode development --config webpack.config.js --open",
+    "start": "node server.js",
+    "dev": "npm-run-all -p watch:css start:dev",
+    "lint": "eslint src/**/*.ts --fix",
+    "slint": "stylelint \"./src/**/*.scss\" --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{scss, css}": [
+      "stylelint --fix"
+    ]
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "formik": "^2.1.4",
+    "normalize.css": "^8.0.1",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "postcss-loader": "^3.0.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "react-router-dom": "^5.2.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.0",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
+    "@types/material-ui": "^0.21.7",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
     "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
+    "@types/uuid": "^8.0.0",
+    "@types/yup": "^0.29.3",
     "@typescript-eslint/eslint-plugin": "^3.5.0",
     "@typescript-eslint/parser": "^3.5.0",
     "autoprefixer": "^9.7.4",
     "css-loader": "^3.4.2",
     "eslint": "^7.3.1",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.3",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.0",
+    "husky": "^4.2.5",
     "image-webpack-loader": "^6.0.0",
+    "img-loader": "^3.0.1",
+    "lint-staged": "^10.2.11",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "npm-run-all": "^4.1.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^2.0.5",
     "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.3",
-    "prettier": "^2.0.5",
+    "stylelint": "^13.6.1",
+    "stylelint-config-sass-guidelines": "^7.0.0",
     "terser-webpack-plugin": "^3.0.6",
     "ts-loader": "^6.2.2",
+    "typesafe-actions": "^5.1.0",
     "typescript": "^3.8.3",
     "uglifyes-webpack-plugin": "^0.4.3",
     "url-loader": "^4.1.0",
