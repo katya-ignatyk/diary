@@ -16,15 +16,14 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
       email: '',
       password: '',
       fetchUser: props.fetchUser,
-      startLoader: props.startLoader,
+      startLoader: props.startLoader
     },
     onSubmit: values => {
       const { username, email, password } = values;
       values.startLoader();
-      values.fetchUser({ username, email, password })    
-      .then((resolved : boolean) => {
+      values.fetchUser({ username, email, password }).then((resolved : boolean) => {
         if (resolved) {
-          history.push('/home');
+          history.push('/signUp');
         }
       });
     },

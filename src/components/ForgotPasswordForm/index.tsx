@@ -17,13 +17,11 @@ function ForgotPasswordForm(props : IForgotPasswordReduxProps) {
     onSubmit: values => {
       const { email } = values;
       props.startLoader();
-      props.sendEmail(email)
-        .then((resolved : boolean) => { 
-          console.log(resolved);
-            if (resolved) {
-              history.push('/'); 
-            }
-        });
+      props.sendEmail(email).then((resolved : boolean) => {
+          if (resolved) {
+            history.push('/'); 
+          }
+      });
     },
     validationSchema: 
       Yup.object().shape({

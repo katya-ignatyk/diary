@@ -21,7 +21,7 @@ function VerifyForm(props : IVerifyReduxProps) {
     }
     props.verifyUser(token).then((resolved : boolean) => { 
       if (resolved) {
-        typeof(resolved) === 'string'? history.push('/forgotPassword') : history.push('/'); 
+        typeof(resolved) === 'string'? history.push('/forgotPassword') : history.push('/home'); 
       }
     });
   }, []);

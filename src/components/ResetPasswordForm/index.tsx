@@ -26,10 +26,9 @@ function ResetPasswordForm(props : IResetPasswordReduxProps) {
     onSubmit: values => {
       const { password } = values;
       props.startLoader();
-      props.resetPassword(password, token)
-      .then((resolved : boolean) => {
+      props.resetPassword(password, token).then((resolved : boolean) => {
         if (resolved) {
-          history.push('/signIn');
+          typeof(resolved) === 'string'? history.push('/forgotPassword') : history.push('/signIn');
         }
       });
     },

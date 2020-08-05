@@ -1,12 +1,15 @@
 import { ActionType } from 'typesafe-actions';
-import { saveUser as actions } from '../../actions/user';
+import { saveUser, authUser,authError } from '../../actions/user';
 import { IUserState } from './interfaces';
 import { UserActionTypes } from './interfaces';
 
-type IUserAction = ActionType<typeof actions>
+type IUserAction = ActionType<typeof saveUser | typeof authUser | typeof authError>
+
 const initialState : IUserState = {
-  email: '',
-  username: ''
+  email: '', 
+  username: '',
+  isLoading: false,
+  isErrors: false,
 };
 
 export const userReducer = (state = initialState, action : IUserAction) => {
@@ -14,6 +17,18 @@ export const userReducer = (state = initialState, action : IUserAction) => {
     case UserActionTypes.SAVE_USER_DATA: {
       return {
         ...state, username: action.payload.username, email: action.payload.email
+      };
+    }
+
+    case UserActionTypes.AUTH_USER: {
+      return {
+        ...state, isErrors: false, isLoading: true
+      };
+    }
+
+    case UserActionTypes.AUTH_ERROR: {
+      return {
+          ...state, isErrors: true, isLoading: false
       };
     }
   

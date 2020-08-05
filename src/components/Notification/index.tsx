@@ -19,7 +19,6 @@ function Notification(props : INotificationReduxProps) {
   const { notifications, deleteNotification } = props;
 
   const handleClose = React.useCallback((event : React.SyntheticEvent, reason ?: string) => {
-    console.log("object");
       if (reason === 'clickaway') {
         return;
       }

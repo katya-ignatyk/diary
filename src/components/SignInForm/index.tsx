@@ -21,10 +21,9 @@ function SignInForm(props : IUserAuthReduxProps) {
     onSubmit: values => {
       const { email, password } = values;
       values.startLoader();
-      values.fetchUser({ email, password })
-      .then((resolved : boolean) => {
+      values.fetchUser({ email, password }).then((resolved : boolean) => {
         if (resolved) {
-          history.push('/home');
+          history.push('/');
         }
       });
     },

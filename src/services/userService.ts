@@ -1,4 +1,36 @@
 import { HttpService } from './httpService';
+import { IUserRegistrationData } from 'components/SignUpForm/interfaces';
+import { IUserAuthData } from 'components/SignInForm/interfaces';
+import { IUserData } from '../redux/actions/user/interfaces';
+
+interface IBaseResponse {
+  message : string;
+}
+
+interface IUserRegistrationResponse {
+  user : IUserRegistrationData;
+  message : string;
+}
+
+interface IVerifyUserResponse {
+  user : IUserData;
+  refreshToken : string;
+  accessToken : string;
+  message : string;
+}
+
+interface IUserAuthResponse {
+  user : IUserAuthData;
+  refreshToken : string;
+  accessToken : string;
+  message : string;
+}
+
+interface IRefreshedTokenResponse {
+  user : IUserRegistrationData;
+  newAccessToken : string;
+  newRefreshToken : string;
+}
 
 export class UserService {
   private static instance : UserService;
@@ -10,25 +42,30 @@ export class UserService {
     return UserService.instance;
   }
 
-  public async sendUserData<T>(url : string, userData : T) {
-    const data = await HttpService.post(url, userData);
-    const dataJson = await data.json();
-    if (!data.ok) {
-      const errMsg = dataJson.message;
-      throw new Error(errMsg);
-    }
-    return dataJson;
+  public async sendUserDataToSignUp<T>(url : string, body : T) {
+    return await HttpService.post<IUserRegistrationResponse, T>(url, body);
   }
 
-  public sendToken(url : string, body : {token : string,}) {
-    return HttpService.post(url, body);
+  public async sendUserDataToSignIn<T>(url : string, body : T) {
+    return await HttpService.post<IUserAuthResponse, T>(url, body);
   }
 
-  public sendEmail(url : string, body : {email : string,}) {
-    return HttpService.post(url, body);
+  public async verifyTokenToSignUp<T>(url : string, body : T) {
+    return await HttpService.post<IVerifyUserResponse, T>(url, body);
   }
 
-  public resetPassword(url : string, body : {password : string, token : string,}) {
-    return HttpService.post(url, body);
+  public sendEmail<T>(url : string, body : T) {
+    return HttpService.post<IBaseResponse, T>(url, body);
+  }
+
+  public resetPassword<T>(url : string, body : T) {
+    return HttpService.post<IBaseResponse,T>(url, body);
+  }
+
+  public verifyAccessToken<T>(url : string, body : T) {
+    return HttpService.post<IBaseResponse,T>(url, body);
+  }
+  public refreshTokens<T>(url : string, body : T) {
+    return HttpService.post<IRefreshedTokenResponse,T>(url, body);
   }
 }
