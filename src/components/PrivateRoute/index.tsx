@@ -1,41 +1,31 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Loader from '../Loader';
-
-interface IPrivateRouteProps {
-  component : React.FC;
-  redirect ?: boolean;
-  errors : boolean;
-  loading : boolean;
-  exact ?: boolean;
-  path : string;
-}
+import { IPrivateRouteProps } from './interfaces';
 
 function PrivateRoute(props : IPrivateRouteProps) {
-  const { component: Component, redirect, errors, loading, exact, path } = props;
+  const { component: Component, errors, loading, exact, path } = props;
+  const isAuth = () => {
+    if (errors && !loading) {
+      return false; 
+    }
+    if (!errors && loading) {
+      return true;
+    }
+  };
+
   return (
     <Route
       exact={exact}
       path={path}
       render={() => {
-        //user is authorized 
-        if (!errors && loading) {
-          if (redirect) {
-            return <Redirect to='/home'/>;
-          }
-          return <Component />;
-          // not authorized
-        } else if (errors && !loading) {
-          if (redirect) {
-            return <Component />;
-          }
-          return <Redirect to='/signIn' />;
+        if (!errors && !loading) {
+          return <Loader />;
         }
-        return <Loader />;
+        return isAuth() ? <Component /> : <Redirect to='/signIn'/>;
       }}
     />
   );
-  
 };
 
 export default PrivateRoute;

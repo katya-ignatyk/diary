@@ -6,12 +6,7 @@ function Header() {
     <>
       <header className={styles.header}>
         <nav className={styles.menu}>
-          <li className={styles['menu__item']}>
-            <a href="/signUp">Sign Up</a>
-          </li>
-          <li className={styles['menu__item']}>
-            <a href="/signIn">Sign In</a>
-          </li>
+          
         </nav>
       </header>
     </>

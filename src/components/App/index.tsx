@@ -24,11 +24,12 @@ function App(props : IAppProps) {
       <main className={styles.main}>
         <Router>
           <Switch>
-            <PrivateRoute errors={isErrors} loading={isLoading} redirect exact path='/signIn' component ={SignInForm}/>
-            <PrivateRoute errors={isErrors} loading={isLoading} redirect exact path='/signUp' component={SignUpForm}/>
-            <PrivateRoute errors={isErrors} loading={isLoading} redirect exact path='/signUp/verify' component={VerifyForm}/> 
-            <PrivateRoute errors={isErrors} loading={isLoading} redirect exact path='/forgotPassword' component={ForgotPasswordForm}/> 
-            <PrivateRoute errors={isErrors} loading={isLoading} redirect exact path='/resetPassword' component={ResetPasswordForm}/>  
+            <Route exact path='/signIn' component ={SignInForm}/>
+            <Route exact path='/signUp' component={SignUpForm}/>
+            <Route exact path='/signUp/verify' component={VerifyForm}/> 
+            <Route exact path='/forgotPassword' component={ForgotPasswordForm}/> 
+            <Route exact path='/resetPassword' component={ResetPasswordForm}/> 
+            <PrivateRoute errors={isErrors} loading={isLoading} exact path='/home' component={() => <div>home</div>}/> 
           </Switch>
         </Router>
         <Notification /> 

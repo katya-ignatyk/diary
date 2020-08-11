@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { IUserRegistrationReduxProps } from './interfaces';
 import Loader from '../Loader';
 import diary from '../../assets/img/diaryForSignUp.jpg';
@@ -82,11 +82,17 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
             />
             <div className={formStyles['form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
           </div>
-          {!isLoaderActive && (
+          {
+            !isLoaderActive && (
             <button type="submit" className={buttonStyles['form__button']}>
               Sign Up
             </button>) ||
-            <Loader />}
+            <Loader />
+          }
+          <div className={formStyles['form__link__wrapper']}>
+            <span>Arleady registered? </span>
+            <Link className={formStyles['form__link']} to='/signIn'>Sign In!</Link>
+          </div>  
         </form>
       </div>
     </div>

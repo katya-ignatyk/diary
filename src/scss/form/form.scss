@@ -59,19 +59,6 @@
           padding: 12px 20px;
         }
 
-        .form__forgot-password__wrapper {
-          margin: 10px 0;
-          text-align: end;
-  
-          .form__forgot-password__link {
-            color: rgb(136, 124, 109);
-  
-            &:hover {
-              color: rgba(0, 0, 0, 0.25);
-            }
-          }
-        }
-
         .form-group__input__invalid-feedback {
           color: rgb(243, 104, 104);
           min-height: 40px;
@@ -79,6 +66,18 @@
         }
       }
 
+      .form__link__wrapper {
+        color: rgb(136, 124, 109);
+        margin: 20px 0 0;
+
+        .form__link {
+          color: rgb(136, 124, 109);
+
+          &:hover {
+            color: rgba(0, 0, 0, 0.25);
+          }
+        }
+      }
     }
   }
 }

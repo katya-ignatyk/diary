@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { IUserAuthData, IUserAuthReduxProps } from './interfaces';
+import { IUserAuthReduxProps } from './interfaces';
 import Loader from '../Loader';
 import diary from '../../assets/img/diaryForSignIn.jpg';
 import formStyles, { form } from '../../scss/form/form.css';
@@ -67,8 +67,8 @@ function SignInForm(props : IUserAuthReduxProps) {
               onChange={handleChange}
               value={values.password}
             />
-            <div className={formStyles['form__forgot-password__wrapper']}>
-              <Link className={formStyles['form__forgot-password__link']} to='/forgotPassword'>Forgot password?</Link>
+            <div className={formStyles['form__link__wrapper']}>
+              <Link className={formStyles['form__link']} to='/forgotPassword'>Forgot password?</Link>
             </div>
             <div className={formStyles['form-group__input__invalid-feedback']}>{touched.password && errors.password && errors.password}</div>
           </div>
@@ -79,6 +79,10 @@ function SignInForm(props : IUserAuthReduxProps) {
             </button>) ||
             <Loader />
           }</div>
+          <div className={formStyles['form__link__wrapper']}>
+            <span>New to Diary? </span>
+            <Link className={formStyles['form__link']} to='/signUp'>Create an account!</Link>
+          </div>
         </form>
       </div>
     </div>
