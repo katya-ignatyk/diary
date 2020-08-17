@@ -6,29 +6,40 @@ import { UserActionTypes } from './interfaces';
 type IUserAction = ActionType<typeof saveUser | typeof authUser | typeof authError>
 
 const initialState : IUserState = {
+  id: 0,
   email: '', 
   username: '',
-  isLoading: false,
+  isLoaded: false,
   isErrors: false,
 };
 
 export const userReducer = (state = initialState, action : IUserAction) => {
   switch (action.type) {
     case UserActionTypes.SAVE_USER_DATA: {
+      const { id , username, email } = action.payload;
+      
       return {
-        ...state, username: action.payload.username, email: action.payload.email
+        ...state, 
+        id ,
+        username,
+        email,
+        isErrors: false
       };
     }
 
     case UserActionTypes.AUTH_USER: {
       return {
-        ...state, isErrors: false, isLoading: true
+        ...state, 
+        isErrors: false, 
+        isLoaded: true
       };
     }
 
     case UserActionTypes.AUTH_ERROR: {
       return {
-          ...state, isErrors: true, isLoading: false
+          ...state, 
+          isErrors: true, 
+          isLoaded: false
       };
     }
   

@@ -1,18 +1,11 @@
 import { connect } from 'react-redux';
 import { Dispatch } from "redux";
-import SignInForm from '../components/SignInForm';
+import SignInForm from '../components/auth/SignInForm';
 import { signIn } from '../redux/actions/user';
-import { IUserAuthData } from '../components/SignInForm/interfaces';
-import { startLoader } from '../redux/actions/loader';
-import { IRootState } from '../interfaces';
-
-const mapStateToProps = (state : IRootState) => ({
-  isLoaderActive: state.loader.isLoaderActive
-});
+import { IUserAuthData } from '../components/auth/SignInForm/interfaces';
 
 const mapDispatchToProps = (dispatch : Dispatch) => ({
-  fetchUser: (userData : IUserAuthData) => signIn(userData)(dispatch),
-  startLoader: () => dispatch(startLoader())
+  signIn: (userData : IUserAuthData) => signIn(userData)(dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInForm);
+export default connect(null, mapDispatchToProps)(SignInForm);

@@ -1,0 +1,9 @@
+.form__link {
+  color: rgb(136, 124, 109);
+  display: block;
+  margin: 10px 0;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.25);
+  }
+}

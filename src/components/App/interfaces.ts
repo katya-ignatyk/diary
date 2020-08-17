@@ -1,5 +1,5 @@
 export interface IAppProps {
   isErrors : boolean;
-  isLoading : boolean;
+  isLoaded : boolean;
   fetchUser : () => void;
 }

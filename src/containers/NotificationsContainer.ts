@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import Notification from '../components/shared/Notification';
 import { IRootState } from '../interfaces';
 import { deleteNotification } from '../redux/actions/notifications/index';
-import Notification from '../components/Notification';
 
 const mapStateToProps = (state : IRootState) => ({
   notifications: state.notifications

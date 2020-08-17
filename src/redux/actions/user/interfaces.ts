@@ -5,9 +5,9 @@ import { UserActionTypes } from '../../reducers/user/interfaces';
 export type ISaveUser = IAction<UserActionTypes.SAVE_USER_DATA, IUserData>
 export type IAuthUser = Action<UserActionTypes.AUTH_USER>
 export type IAuthError = Action<UserActionTypes.AUTH_ERROR>
-export type IStartLoading = Action<UserActionTypes.START_LOADING>
 
 export interface IUserData {
+  id : number;
   email : string;
   username : string;
 }

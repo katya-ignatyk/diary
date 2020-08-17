@@ -5,12 +5,12 @@ import { fetchUser } from '../redux/actions/user';
 import { IRootState } from 'interfaces';
 
 const mapStateToProps = (state : IRootState) => ({
-  isLoading: state.user.isLoading,
+  isLoaded: state.user.isLoaded,
   isErrors: state.user.isErrors
 });
 
 const mapDispatchToProps = (dispatch : Dispatch) => ({
-  fetchUser: () => fetchUser()(dispatch)
+  fetchUser: () => fetchUser()(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

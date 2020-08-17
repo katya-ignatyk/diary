@@ -1,13 +1,14 @@
 import { Dispatch } from 'redux';
 import { UserService } from '../../../services/userService';
 import { StorageService } from '../../../services/storageService';
-import { IUserRegistrationData } from '../../../components/SignUpForm/interfaces';
-import { IUserAuthData } from '../../../components/SignInForm/interfaces';
+import { IUserRegistrationData } from '../../../components/registration/SignUpForm/interfaces';
+import { IUserAuthData } from '../../../components/auth/SignInForm/interfaces';
 import { UserActionTypes } from '../../reducers/user/interfaces';
 import { sendNotification } from '../notifications';
 import { stopLoader, startLoader } from '../loader';
 import { config } from '../../../env';
-import { ISaveUser, IUserData, IAuthUser, IAuthError, IStartLoading } from './interfaces';
+import { ISaveUser, IUserData, IAuthUser, IAuthError } from './interfaces';
+import { isProfileExists } from '../profile';
 import { CustomErrors } from '../../../interfaces';
 
 export const saveUser = (userData : IUserData) : ISaveUser => {
@@ -32,6 +33,7 @@ export const authError = () : IAuthError => {
 //sign up 
 
 export const signUp = (userData : IUserRegistrationData) => async(dispatch : Dispatch) => {
+  dispatch(startLoader());
 
   try {
     const response = await UserService.Instance.sendUserDataToSignUp(`${config.BE_URL}/signUp`, userData);
@@ -40,9 +42,6 @@ export const signUp = (userData : IUserRegistrationData) => async(dispatch : Dis
       message: response.data.message, 
       time: 2000 
     }));
-    dispatch(stopLoader());
-
-    return true;
 
   } catch (error) {
 
@@ -51,17 +50,18 @@ export const signUp = (userData : IUserRegistrationData) => async(dispatch : Dis
       message: error.response.data.message, 
       time: 2000 
     }));
-    dispatch(stopLoader());
   }
 
+  dispatch(stopLoader());
 };
 
 export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
+  dispatch(startLoader());
+
   try {
     const response = await UserService.Instance.verifyTokenToSignUp(`${config.BE_URL}/signUp/verify`, { token });
     const respBody = response.data;
 
-    dispatch(stopLoader());
     dispatch(sendNotification({ 
       severity: 'success', 
       message: respBody.message, 
@@ -77,9 +77,9 @@ export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
   } catch (error) {
 
     const err = error.response;
-    dispatch(stopLoader());
 
-    if (err.data.code === CustomErrors.default_expiried) {
+    if (err.data.code === CustomErrors.DEFAULT_EXPIRED) {
+      dispatch(stopLoader());
       dispatch(sendNotification({ 
         severity: 'error', 
         message: err.data.message, 
@@ -95,11 +95,15 @@ export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
       time: 2000 
     }));
   }
+
+  dispatch(stopLoader());
 };
 
 //sign in
 
 export const signIn = (userData : IUserAuthData) => async(dispatch : Dispatch) => {
+  dispatch(startLoader());
+
   try {
     const response = await UserService.Instance.sendUserDataToSignIn(`${config.BE_URL}/signIn`, userData);
     const respBody = response.data;
@@ -107,6 +111,7 @@ export const signIn = (userData : IUserAuthData) => async(dispatch : Dispatch) =
     StorageService.setAccessToken(respBody.accessToken);
     StorageService.setRefreshToken(respBody.refreshToken);
 
+    dispatch(saveUser(respBody.user));
     dispatch(stopLoader());
     dispatch(sendNotification({ 
       severity: 'success', 
@@ -114,7 +119,7 @@ export const signIn = (userData : IUserAuthData) => async(dispatch : Dispatch) =
       time: 2000 
     }));
 
-    return true;
+    return await isProfileExists(respBody.user.id)(dispatch);
 
   } catch (error) {
 
@@ -124,43 +129,40 @@ export const signIn = (userData : IUserAuthData) => async(dispatch : Dispatch) =
       message: error.response.data.message, 
       time: 2000 
     }));
-
-    return null;
   }
 };
 
 //forgot password
 
-export const sendEmail = (email : string) => async(dispatch : Dispatch) => {
+export const sendForgotPasswordEmail = (email : string) => async(dispatch : Dispatch) => {
+  dispatch(startLoader());
 
   try {
     const response = await UserService.Instance.sendEmail(`${config.BE_URL}/forgotPassword`, { email });
 
-    dispatch(stopLoader());
     dispatch(sendNotification({ 
       severity: 'success', 
       message: response.data.message, 
       time: 2000 
     }));
-    
-    return true;
 
   } catch (error) {
 
-    dispatch(stopLoader());
     dispatch(sendNotification({ 
       severity: 'error', 
       message: error.response.data.message, 
       time: 2000 
     }));
-
-    return null;
   }
+
+  dispatch(stopLoader());
 };
 
 //reset password
 
 export const resetPassword = (password : string, token : string) => async(dispatch : Dispatch) => {
+  dispatch(startLoader());
+  
   try {
     const response = await UserService.Instance.resetPassword(`${config.BE_URL}/resetPassword`, { password, token });
 
@@ -170,8 +172,6 @@ export const resetPassword = (password : string, token : string) => async(dispat
       message: response.data.message, 
       time: 2000 
     }));
-
-    return true;
 
   } catch (error) {
 
@@ -192,6 +192,7 @@ export const resetPassword = (password : string, token : string) => async(dispat
 
 export const fetchUser = () => async(dispatch : Dispatch) => {
   dispatch(startLoader());
+
   try {
     const accessToken = StorageService.getAccessToken();
 
@@ -201,41 +202,35 @@ export const fetchUser = () => async(dispatch : Dispatch) => {
       return;
     }
 
-    await UserService.Instance.verifyAccessToken(`${config.BE_URL}/fetchUser`, { accessToken });
+    const response = await UserService.Instance.verifyAccessToken(`${config.BE_URL}/fetchUser`, { accessToken });
 
     dispatch(authUser());
+    dispatch(saveUser(response.data.user));
+    await isProfileExists(response.data.user.id)(dispatch);
     dispatch(stopLoader());
-
-    return;
 
   } catch (error) {
-    
-    dispatch(authError());
-    dispatch(stopLoader());
 
-    if (error.response.data.code === CustomErrors.access_expiried) {
+    if (error.response.data.code === CustomErrors.ACCESS_EXPIRED) {
+
       dispatch(authError());
-      dispatch(stopLoader());
 
       try {
+
         const refreshToken = StorageService.getRefreshToken();
         const response = await UserService.Instance.refreshTokens(`${config.BE_URL}/refreshAccessToken`, { refreshToken });
 
         dispatch(authUser());
+        dispatch(saveUser(response.data.user));
 
         StorageService.setAccessToken(response.data.newAccessToken);
         StorageService.setRefreshToken(response.data.newRefreshToken);
 
-        return;
-
       } catch (error) {
-
-        dispatch(authError());
-        dispatch(stopLoader());
-
-        return;
+        return false;
       }
+
+      dispatch(stopLoader());
     }
-    return;
   }
 };
