@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 import styles from './styles.css';
 import linkStyles from '../../scss/link/styles.css';
 
-export const SettingsLayout : React.FunctionComponent = (props) => {
+export const SettingsLayout : React.FunctionComponent = ({ children }) => {
   return (
-    <div className={styles['settings__container']}>
+    <section className={styles.settings__container}>
       <nav className={styles.menu}>
-        <Link className={linkStyles['form__link']} to='/settings'>
+        <Link className={linkStyles.form__link} to='/settings'>
           Profile
         </Link> 
-        <Link className={linkStyles['form__link']} to='/notifications'>
+        <Link className={linkStyles.form__link} to='/notifications'>
           Notifications
         </Link>
       </nav>
-      <div className={styles['settings__form__wrapper']}>
-        { props.children }
-      </div>
-    </div>
+      <aside className={styles.settings}>
+        { children }
+      </aside>
+    </section>
   );
 };

@@ -1,17 +1,17 @@
 import { Dispatch } from 'redux';
 import { UserService } from '../../../services/userService';
 import { StorageService } from '../../../services/storageService';
-import { IUserRegistrationData } from '../../../components/registration/SignUpForm/interfaces';
-import { IUserAuthData } from '../../../components/auth/SignInForm/interfaces';
+import { IUserRegistrationData } from './interfaces';
+import { IUserAuthData } from './interfaces';
 import { UserActionTypes } from '../../reducers/user/interfaces';
 import { sendNotification } from '../notifications';
 import { stopLoader, startLoader } from '../loader';
 import { config } from '../../../env';
-import { ISaveUser, IUserData, IAuthUser, IAuthError } from './interfaces';
-import { isProfileExists } from '../profile';
+import { ISaveUser, IReduxUserData, IAuthUser, IAuthError } from './interfaces';
 import { CustomErrors } from '../../../interfaces';
+import { saveProfile } from '../profile';
 
-export const saveUser = (userData : IUserData) : ISaveUser => {
+export const saveUser = (userData : IReduxUserData) : ISaveUser => {
   return {
     type: UserActionTypes.SAVE_USER_DATA,
     payload: userData
@@ -36,11 +36,13 @@ export const signUp = (userData : IUserRegistrationData) => async(dispatch : Dis
   dispatch(startLoader());
 
   try {
-    const response = await UserService.Instance.sendUserDataToSignUp(`${config.BE_URL}/signUp`, userData);
+
+    const response = await UserService.Instance.signUp(`${config.BE_URL}/signUp`, userData);
+
     dispatch(sendNotification({ 
       severity: 'success', 
       message: response.data.message, 
-      time: 2000 
+      time: 4000 
     }));
 
   } catch (error) {
@@ -48,25 +50,28 @@ export const signUp = (userData : IUserRegistrationData) => async(dispatch : Dis
     dispatch(sendNotification({ 
       severity: 'error' , 
       message: error.response.data.message, 
-      time: 2000 
+      time: 4000 
     }));
+
   }
 
   dispatch(stopLoader());
 };
 
-export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
+export const verifySignUp = (token : string) => async(dispatch : Dispatch) => {
   dispatch(startLoader());
 
   try {
-    const response = await UserService.Instance.verifyTokenToSignUp(`${config.BE_URL}/signUp/verify`, { token });
+    
+    const response = await UserService.Instance.verifySignUp(`${config.BE_URL}/signUp/verify`, { token });
     const respBody = response.data;
 
     dispatch(sendNotification({ 
       severity: 'success', 
       message: respBody.message, 
-      time: 2000 
+      time: 4000 
     }));
+
     dispatch(saveUser(respBody.user));
 
     StorageService.setAccessToken(respBody.accessToken);
@@ -80,10 +85,11 @@ export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
 
     if (err.data.code === CustomErrors.DEFAULT_EXPIRED) {
       dispatch(stopLoader());
+
       dispatch(sendNotification({ 
         severity: 'error', 
         message: err.data.message, 
-        time: 2000 
+        time: 4000 
       }));
 
       return err.data.message;
@@ -92,7 +98,7 @@ export const verifyUser = (token : string) => async(dispatch : Dispatch) => {
     dispatch(sendNotification({ 
       severity: 'error', 
       message: err.data.message, 
-      time: 2000 
+      time: 4000 
     }));
   }
 
@@ -105,21 +111,23 @@ export const signIn = (userData : IUserAuthData) => async(dispatch : Dispatch) =
   dispatch(startLoader());
 
   try {
-    const response = await UserService.Instance.sendUserDataToSignIn(`${config.BE_URL}/signIn`, userData);
+    const response = await UserService.Instance.signIn(`${config.BE_URL}/signIn`, userData);
     const respBody = response.data;
 
     StorageService.setAccessToken(respBody.accessToken);
     StorageService.setRefreshToken(respBody.refreshToken);
 
     dispatch(saveUser(respBody.user));
+    dispatch(saveProfile(respBody.profile));
+    dispatch(authUser());
     dispatch(stopLoader());
     dispatch(sendNotification({ 
       severity: 'success', 
       message: respBody.message, 
-      time: 2000 
+      time: 4000 
     }));
 
-    return await isProfileExists(respBody.user.id)(dispatch);
+    return true;
 
   } catch (error) {
 
@@ -127,7 +135,7 @@ export const signIn = (userData : IUserAuthData) => async(dispatch : Dispatch) =
     dispatch(sendNotification({ 
       severity: 'error', 
       message: error.response.data.message, 
-      time: 2000 
+      time: 4000 
     }));
   }
 };
@@ -138,12 +146,12 @@ export const sendForgotPasswordEmail = (email : string) => async(dispatch : Disp
   dispatch(startLoader());
 
   try {
-    const response = await UserService.Instance.sendEmail(`${config.BE_URL}/forgotPassword`, { email });
+    const response = await UserService.Instance.sendEmail(`${config.BE_URL}/signIn/forgotPassword`, { email });
 
     dispatch(sendNotification({ 
       severity: 'success', 
       message: response.data.message, 
-      time: 2000 
+      time: 4000 
     }));
 
   } catch (error) {
@@ -151,7 +159,7 @@ export const sendForgotPasswordEmail = (email : string) => async(dispatch : Disp
     dispatch(sendNotification({ 
       severity: 'error', 
       message: error.response.data.message, 
-      time: 2000 
+      time: 4000 
     }));
   }
 
@@ -164,13 +172,13 @@ export const resetPassword = (password : string, token : string) => async(dispat
   dispatch(startLoader());
   
   try {
-    const response = await UserService.Instance.resetPassword(`${config.BE_URL}/resetPassword`, { password, token });
+    const response = await UserService.Instance.resetPassword(`${config.BE_URL}/signIn/resetPassword`, { password, token });
 
     dispatch(stopLoader());
     dispatch(sendNotification({ 
       severity: 'success', 
       message: response.data.message, 
-      time: 2000 
+      time: 4000 
     }));
 
   } catch (error) {
@@ -181,7 +189,7 @@ export const resetPassword = (password : string, token : string) => async(dispat
     dispatch(sendNotification({ 
       severity: 'error', 
       message: `${err.data.message}! Try to reset password again`, 
-      time: 2000 
+      time: 4000 
     }));
 
     return err.data.message;
@@ -202,14 +210,15 @@ export const fetchUser = () => async(dispatch : Dispatch) => {
       return;
     }
 
-    const response = await UserService.Instance.verifyAccessToken(`${config.BE_URL}/fetchUser`, { accessToken });
+    const response = await UserService.Instance.fetchUser(`${config.BE_URL}/user`, { accessToken });
 
     dispatch(authUser());
     dispatch(saveUser(response.data.user));
-    await isProfileExists(response.data.user.id)(dispatch);
+    dispatch(saveProfile(response.data.profile));
     dispatch(stopLoader());
 
   } catch (error) {
+    console.log(error);
 
     if (error.response.data.code === CustomErrors.ACCESS_EXPIRED) {
 
@@ -218,13 +227,14 @@ export const fetchUser = () => async(dispatch : Dispatch) => {
       try {
 
         const refreshToken = StorageService.getRefreshToken();
-        const response = await UserService.Instance.refreshTokens(`${config.BE_URL}/refreshAccessToken`, { refreshToken });
+        const response = await UserService.Instance.auth(`${config.BE_URL}/auth`, { refreshToken });
 
         dispatch(authUser());
-        dispatch(saveUser(response.data.user));
+        dispatch(saveUser(response.data.user));    
+        dispatch(saveProfile(response.data.profile));
 
-        StorageService.setAccessToken(response.data.newAccessToken);
-        StorageService.setRefreshToken(response.data.newRefreshToken);
+        StorageService.setAccessToken(response.data.updatedAccessToken);
+        StorageService.setRefreshToken(response.data.updatedRefreshToken);
 
       } catch (error) {
         return false;

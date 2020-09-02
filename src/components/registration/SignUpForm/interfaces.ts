@@ -1,9 +1,5 @@
-export interface IUserRegistrationData {
-  username : string;
-  email : string;
-  password : string;
-}
+import { IUserRegistrationData } from '../../../redux/actions/user/interfaces';
 
 export interface IUserRegistrationReduxProps {
-  signUp : (values : IUserRegistrationData) => Promise<void>;
+  signUp : (user : IUserRegistrationData) => Promise<void>;
 }

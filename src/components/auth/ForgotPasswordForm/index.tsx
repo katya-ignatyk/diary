@@ -43,7 +43,7 @@ function ForgotPasswordForm(props : IForgotPasswordReduxProps) {
       
       <Button text='Send email'/>
 
-      <Link className={linkStyles['form__link']} to='/signIn'>Back to sign in</Link>
+      <Link className={linkStyles.form__link} to='/signIn'>Back to sign in</Link>
     </Form>
   );
 }

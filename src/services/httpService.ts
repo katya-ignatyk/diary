@@ -1,12 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { CustomErrors } from '../interfaces';
 
-interface IError {
-  status : number;
-  message : string;
-  code ?: CustomErrors;
-}
-
 export class HttpService {
   public static get<T>(url : string, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
     return this.sendRequest<T>({
@@ -25,7 +19,7 @@ export class HttpService {
     });
   }
 
-  public static put<T>(url : string, data ?: T, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T | IError>> {
+  public static put<T, P>(url : string, data ?: P, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
     return this.sendRequest<T>({
       url,
       method: 'put',
@@ -34,7 +28,7 @@ export class HttpService {
     });
   }
 
-  public static delete<T>(url : string, data ?: T, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
+  public static delete<T, P>(url : string, data ?: P, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
     return this.sendRequest<T>({
       url,
       method: 'delete',

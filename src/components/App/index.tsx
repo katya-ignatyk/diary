@@ -39,8 +39,6 @@ function App(props : IAppProps) {
           <Route exact path='/signUp/verify' component={VerifyForm}/> 
           {/* settings routes */}
           <PrivateRoute errors={isErrors} loaded={isLoaded} exact path='/settings' component={ProfileForm}/> 
-          {/* <PrivateRoute errors={isErrors} loaded={isLoaded} exact path='/changePassword' component={ProfileForm}/> */}
-          {/* <PrivateRoute errors={isErrors} loaded={isLoaded} exact path='/notifications' component={ProfileForm}/> */}
         </Switch>
       </Router>
       <Notification /> 

@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { INotificationState } from './redux/reducers/notifications/interfaces';
 import { ILoaderState } from './redux/reducers/loader/interfaces';
 import { IUserState } from 'redux/reducers/user/interfaces';
-import { IProfileState } from 'redux/actions/profile/interfaces';
+import { IProfileState } from 'redux/reducers/profile/interfaces';
 
 export interface IAction<T, S> extends Action<T> {
   payload : S;

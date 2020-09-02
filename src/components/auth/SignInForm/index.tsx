@@ -1,7 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import diary from '../../../assets/img/diaryForSignIn.jpg';
 import linkStyles from '../../../scss/link/styles.css';
@@ -14,8 +13,8 @@ import { emailValidation, passwordValidation } from '../../../validation';
 
 function SignInForm(props : IUserAuthReduxProps) {
   const { signIn } = props;
-
   const history = useHistory();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -24,11 +23,11 @@ function SignInForm(props : IUserAuthReduxProps) {
     onSubmit: (values) => {
       const { email, password } = values;
       
-      signIn({ email, password }).then((resolved : boolean) => {
-          resolved ? 
-          history.push('/') : 
-          history.push('/settings');
-        });
+      signIn({ email, password }).then((resolve) => {
+        resolve ? 
+        history.push('/settings'): 
+        history.push('/signIn');
+      });
     },
     validationSchema: Yup.object().shape({
       email: emailValidation(),
@@ -60,11 +59,11 @@ function SignInForm(props : IUserAuthReduxProps) {
         />
         <Error touched={touched.password} errors={errors.password}/>
 
-        <Link className={linkStyles['form__link']} to='/forgotPassword'>Forgot password?</Link>
+        <Link className={linkStyles.form__link} to='/forgotPassword'>Forgot password?</Link>
 
         <Button text='Sign In'/>
         
-        <Link className={linkStyles['form__link']} to='/signUp'>New to Diary?  Create an account!</Link>
+        <Link className={linkStyles.form__link} to='/signUp'>New to Diary?  Create an account!</Link>
     </Form>
   );
 }

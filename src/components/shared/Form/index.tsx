@@ -12,12 +12,12 @@ export const Form : React.FunctionComponent<PropsWithChildren<IFormProps>> = ({ 
 
   return (
     <PublicLayout>
-      <div className={styles['form__container']}>
+      <div className={styles.form__container}>
         <div className={styles['form__image-wrapper']}>
-          <img className={styles['form__image']} src={imgSrc} alt=""/>
+          <img className={styles.form__image} src={imgSrc} alt=""/>
         </div>
-        <div className={styles['form__wrapper']}>
-          <h1 className={styles['form__title']}>{title}</h1>
+        <div className={styles.form__wrapper}>
+          <h1 className={styles.form__title}>{title}</h1>
           <form className={styles.form} onSubmit={onSubmit}>
             {children}
           </form>

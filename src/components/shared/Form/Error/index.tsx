@@ -9,7 +9,7 @@ interface IErrorProps {
 function Error(props : IErrorProps) {
   const { touched, errors } = props;
   return (
-    <div className={styles['form__error']}>
+    <div className={styles.form__error}>
       {touched && errors }
     </div>
 

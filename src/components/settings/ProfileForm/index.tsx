@@ -7,15 +7,16 @@ import styles from './styles.css';
 import { profileValidationSchema } from '../../../validation';
 import { SettingsLayout } from '../../../layouts/SettingsLayout';
 import { IProfileReduxProps } from './interfaces';
+import Avatar from '../../../containers/AvatarContainer';
 
 function ProfileForm(props : IProfileReduxProps) {
   const { 
-      userId, 
+      id, 
       girl_name, 
       girl_age, 
       boy_name, 
       boy_age,
-      sendProfile
+      updateProfile
   } = props;
 
   const formik = useFormik({
@@ -23,20 +24,18 @@ function ProfileForm(props : IProfileReduxProps) {
       girl_name,
       girl_age,
       boy_name,
-      boy_age
+      boy_age,
     },
     enableReinitialize: true,
     onSubmit: values => {
       const { girl_name, girl_age, boy_name, boy_age } = values;
 
-      sendProfile({ 
-        userId, 
-        profile: {
-          girl_name, 
-          girl_age, 
-          boy_name, 
-          boy_age 
-        }
+      updateProfile({ 
+        id,
+        girl_name, 
+        girl_age, 
+        boy_name, 
+        boy_age,
       });
     },
     validationSchema: profileValidationSchema()
@@ -46,7 +45,8 @@ function ProfileForm(props : IProfileReduxProps) {
 
   return (
     <SettingsLayout>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <Avatar />
+      <form className={styles.form} onSubmit={handleSubmit}>        
         <Input 
           id='girl_name'
           name='girl_name'

@@ -1,38 +1,34 @@
 import { HttpService } from './httpService';
-import { IUserRegistrationData } from '../components/registration/SignUpForm/interfaces';
-import { IUserData } from '../redux/actions/user/interfaces';
+import { IUserRegistrationData, IReduxUserData } from '../redux/actions/user/interfaces';
+import { IProfileState } from '../redux/reducers/profile/interfaces';
 
 interface IBaseResponse {
   message : string;
 }
 
-interface IUserRegistrationResponse {
-  user : IUserRegistrationData;
-  message : string;
-}
-
-interface IVerifyUserResponse {
-  user : IUserData;
+interface IVerifySignUpResponse {
+  user : IReduxUserData;
   refreshToken : string;
   accessToken : string;
   message : string;
 }
 
-interface IUserAuthResponse {
-  user : IUserData;
+interface IUserSignInResponse {
+  user : IReduxUserData;
+  profile : IProfileState;
   refreshToken : string;
   accessToken : string;
   message : string;
 }
 
-interface IRefreshedTokenResponse {
-  user : IUserData;
-  newAccessToken : string;
-  newRefreshToken : string;
+interface IFetchUserResponse {
+  user : IReduxUserData;
+  profile : IProfileState;
 }
 
-interface IVerifyAccessTokenResponse {
-  user : IUserData;
+interface IUserAuthResponse extends IFetchUserResponse {
+  updatedAccessToken : string;
+  updatedRefreshToken : string;
 }
 
 export class UserService {
@@ -45,16 +41,16 @@ export class UserService {
     return UserService.instance;
   }
 
-  public sendUserDataToSignUp<T>(url : string, body : T) {
-    return HttpService.post<IUserRegistrationResponse, T>(url, body);
+  public signUp<T>(url : string, body : T) {
+    return HttpService.post<IBaseResponse, T>(url, body);
   }
 
-  public sendUserDataToSignIn<T>(url : string, body : T) {
-    return HttpService.post<IUserAuthResponse, T>(url, body);
+  public signIn<T>(url : string, body : T) {
+    return HttpService.post<IUserSignInResponse, T>(url, body);
   }
 
-  public verifyTokenToSignUp<T>(url : string, body : T) {
-    return HttpService.post<IVerifyUserResponse, T>(url, body);
+  public verifySignUp<T>(url : string, body : T) {
+    return HttpService.post<IVerifySignUpResponse, T>(url, body);
   }
 
   public sendEmail<T>(url : string, body : T) {
@@ -65,10 +61,11 @@ export class UserService {
     return HttpService.post<IBaseResponse, T>(url, body);
   }
 
-  public verifyAccessToken<T>(url : string, body : T) {
-    return HttpService.post<IBaseResponse & IVerifyAccessTokenResponse,T>(url, body);
+  public fetchUser<T>(url : string, body : T) {
+    return HttpService.post<IFetchUserResponse,T>(url, body);
   }
-  public refreshTokens<T>(url : string, body : T) {
-    return HttpService.post<IRefreshedTokenResponse, T>(url, body);
+
+  public auth<T>(url : string, body : T) {
+    return HttpService.post<IUserAuthResponse, T>(url, body);
   }
 }

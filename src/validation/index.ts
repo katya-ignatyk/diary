@@ -17,10 +17,23 @@ export function confirmPasswordValidation() {
 }
 
 export function profileValidationSchema() {
+
   return Yup.object().shape({
-    girl_age: Yup.number().required('Age is required'),
-    boy_age: Yup.number().required('Age is required'),
-    girl_name: Yup.string().required('Name is required'),
-    boy_name: Yup.string().required('Name is required')
+    girl_age: Yup.number()
+      .required('Age is required')
+      .nullable(false)
+      .min(1, 'Age must be greater than 1')
+      .max(100, 'Age must be less than 100'),
+    boy_age: Yup.number()
+      .required('Age is required')
+      .nullable(false)
+      .min(1, 'Age must be greater than 1')
+      .max(100, 'Age must be less than 100'),
+    girl_name: Yup.string()
+      .required('Name is required')
+      .test('is-correct-name', 'Name is invalid', value => /^[a-zA-Z ]+$/.test(value)),
+    boy_name: Yup.string()
+      .required('Name is required')
+      .test('is-correct-name', 'Name is invalid', value => /^[a-zA-Z ]+$/.test(value)),
   });
 }

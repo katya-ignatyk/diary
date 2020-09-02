@@ -1,8 +1,5 @@
-export interface IUserAuthData {
-  email : string;
-  password : string;
-}
+import { IUserAuthData } from '../../../redux/actions/user/interfaces';
 
 export interface IUserAuthReduxProps {
-  signIn : (userData : IUserAuthData) => Promise<boolean>;
+  signIn : (userData : IUserAuthData) => Promise<boolean> ;
 }

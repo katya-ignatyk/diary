@@ -64,7 +64,7 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
 
       <Button text='Sign Up'/>
 
-      <Link className={linkStyles['form__link']} to='/signIn'>Arleady registered? Sign In!</Link>
+      <Link className={linkStyles.form__link} to='/signIn'>Arleady registered? Sign In!</Link>
 
     </Form>
   );

@@ -8,7 +8,7 @@ interface IErrorProps {
 function Text(props : IErrorProps) {
   const { text } = props;
   return (
-    <div className={styles['form__text']}>
+    <div className={styles.form__text}>
       {text}
     </div>
 

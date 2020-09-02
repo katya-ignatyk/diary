@@ -1,9 +1,8 @@
-import { ActionType } from 'typesafe-actions';
-import { saveUser, authUser,authError } from '../../actions/user';
 import { IUserState } from './interfaces';
 import { UserActionTypes } from './interfaces';
+import { ISaveUser, IAuthError, IAuthUser } from 'redux/actions/user/interfaces';
 
-type IUserAction = ActionType<typeof saveUser | typeof authUser | typeof authError>
+type IUserAction = ISaveUser | IAuthError | IAuthUser;
 
 const initialState : IUserState = {
   id: 0,

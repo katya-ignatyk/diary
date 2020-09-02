@@ -1,13 +1,5 @@
 import { HttpService } from "./httpService";
-import { IProfileState } from '../redux/actions/profile/interfaces';
-
-interface IProfileExistsResponse {
-  profile : IProfileState;
-}
-
-interface IBaseResponse {
-  status : number;
-}
+import { IProfileData, IAvatar } from '../redux/actions/profile/interfaces';
 
 export class ProfileService {
   private static instance : ProfileService;
@@ -19,11 +11,15 @@ export class ProfileService {
     return ProfileService.instance;
   }
 
-  public profileExists<T>(url : string, body : T) {
-    return HttpService.post<IProfileExistsResponse, T>(url, body);
+  public updateProfile<T>(url : string, body : T) {
+    return HttpService.put<IProfileData, T>(url, body);
   }
 
-  public saveProfileChanges<T>(url : string, body : T) {
-    return HttpService.post<IProfileExistsResponse, T>(url, body);
+  public updateAvatar<T>(url : string, body : T) {
+    return HttpService.put<IAvatar, T>(url, body);
+  }
+
+  public deleteAvatar<T>(url : string, body : T) {
+    return HttpService.delete<IAvatar, T>(url, body);
   }
 }
