@@ -1,0 +1,55 @@
+@mixin center-position($parentWidth, $childrenWidth) {
+  left: ($parentWidth/2 - $childrenWidth/2);
+  position: absolute;
+  top: ($parentWidth/2 - $childrenWidth/2); 
+}
+
+@mixin absolute-position($top, $right, $bottom, $left) {
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+  right: $right;
+  top: $top;
+}
+
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-justify-content($justify-content) {
+  @include flex-column();
+  justify-content: $justify-content;
+}
+
+@mixin flex-row-justify-content($justify-content) {
+  display: flex;
+  justify-content: $justify-content;
+}
+
+@mixin size($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin reset-base-link() {
+  display: block;
+  text-decoration: none;
+}
+
+@mixin reset-base-button() {
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin reset-base-input() {
+  background: transparent;
+  outline: none;
+}
+
+@mixin textarea-size() {
+  max-height: 100%;
+  max-width: 90%;
+  min-height: min-content;
+  min-width: min-content;
+}

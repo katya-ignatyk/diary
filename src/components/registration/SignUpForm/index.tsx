@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 import diary from '../../../assets/img/diaryForSignUp.jpg';
-import linkStyles from '../../../scss/link/styles.css';
+import linkStyles from '../../../scss/common/link/styles.css';
 import Button from '../../../containers/ButtonContainer';
 import Input from '../../shared/Form/Input';
 import Error from '../../shared/Form/Error';
@@ -64,7 +64,7 @@ function SignUpForm(props : IUserRegistrationReduxProps) {
 
       <Button text='Sign Up'/>
 
-      <Link className={linkStyles.form__link} to='/signIn'>Arleady registered? Sign In!</Link>
+      <Link className={linkStyles.link} to='/signIn'>Arleady registered? Sign In!</Link>
 
     </Form>
   );

@@ -3,10 +3,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import Button from '../../../../containers/ButtonContainer';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+import Button from '../../containers/ButtonContainer';
 import styles from './styles.css';
-import buttonStyles from '../../../shared/Form/Button/button.css';
-import avatarStyles from '../../../../scss/avatar/styles.css';
+import buttonStyles from '../shared/Form/Button/button.css';
+import avatarStyles from '../../scss/common/avatar/styles.css';
 import { IAvatarReduxProps } from './interfaces';
 
 function Avatar(props : IAvatarReduxProps) {
@@ -14,6 +16,9 @@ function Avatar(props : IAvatarReduxProps) {
   const { id, avatar, deleteAvatar, updateAvatar } = props;
 
   const [open, setOpen] = useState(false);
+
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleOpen = () => {
     setOpen(true);
@@ -42,13 +47,13 @@ function Avatar(props : IAvatarReduxProps) {
 
   return (
     <div className={styles.avatar__section}>
-      <img src= {avatar} alt='avatar' className={avatarStyles.avatar}/>
-      <button className={styles.button} onClick={handleOpen}>
-        Change profile photo
-      </button>
+      <img src= {avatar} alt='avatar' className={avatarStyles.avatar} onClick={handleOpen}/>
+      
       <Dialog
         open={open}
         onClose={handleClose}
+        fullScreen={fullScreen}
+        aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle>
           Change profile photo

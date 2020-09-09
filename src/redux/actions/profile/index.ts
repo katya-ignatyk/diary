@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { config } from '../../../env';
 import { startLoader, stopLoader } from '../loader';
-import { ProfileService } from '../../../services/profileService';
+import { ProfileService } from '../../../services';
 import { IProfileData, IAvatar, ISaveProfile, ISaveProfileData, IUpdateProfileAvatar, IDeleteProfileAvatar } from './interfaces';
 import { IProfileActionTypes, IProfileState } from '../../reducers/profile/interfaces';
 import { sendNotification } from '../notifications';
@@ -39,7 +39,7 @@ export const updateProfile = (profile : IProfileData) => async(dispatch : Dispat
 
   try { 
 
-    const response = await ProfileService.Instance.updateProfile(`${config.BE_URL}/profile`, profile);
+    const response = await ProfileService.Instance.updateProfile(`${config.BE_URL}/settings/profile`, profile);
     dispatch(saveProfileData(response.data));
 
     dispatch(sendNotification({
@@ -66,7 +66,7 @@ export const updateAvatar = (image : FormData) => async(dispatch : Dispatch) => 
 
   try {
     
-    const response = await ProfileService.Instance.updateAvatar(`${config.BE_URL}/profile/avatar`, image);
+    const response = await ProfileService.Instance.updateAvatar(`${config.BE_URL}/settings/profile/avatar`, image);
     dispatch(updateProfileAvatar(response.data));
     
     dispatch(sendNotification({
@@ -93,7 +93,7 @@ export const deleteAvatar = (profileId : number) => async(dispatch : Dispatch) =
 
   try {
 
-    const response = await ProfileService.Instance.deleteAvatar(`${config.BE_URL}/profile/avatar`, { id: profileId });
+    const response = await ProfileService.Instance.deleteAvatar(`${config.BE_URL}/settings/profile/avatar`, { id: profileId });
     dispatch(deleteProfileAvatar(response.data));
 
   } catch (error) {

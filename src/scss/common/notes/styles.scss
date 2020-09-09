@@ -1,0 +1,44 @@
+@import '../../mixins/mixins.scss';
+
+.icon__button {
+  border: 0;
+  @include reset-base-button();
+  @include size(30px, 30px);
+
+  &:hover {
+    transform: scale(1.3);
+    transition: 0.8s;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.disabled__input {
+  @include reset-base-input();
+  border: 0;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+
+  &:disabled {
+    border: 0;
+    color: rgba(130, 118, 118, 0.933);
+    margin: 0;
+  }
+}
+
+.note__container {
+  @include flex-column();
+  @include size(400px, 400px);
+  align-self: center;
+  background-color: rgba(172, 170, 169, 0.4);
+  border-radius: 5px;
+  margin: 10px;
+  position: relative;
+  text-align: center;
+}

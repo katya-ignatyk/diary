@@ -1,0 +1,35 @@
+@import '../../../scss/mixins/mixins.scss';
+
+.delete__button {
+  @include absolute-position(13px, 13px, auto, auto);
+  background: url('../../../assets/img/delete.png') no-repeat;
+  background-size: cover;
+}
+
+.edit__button {
+  @include absolute-position(13px, 45px, auto, auto);
+  background: url('../../../assets//img/pencil.png') no-repeat;
+  background-size: cover;
+}
+  
+.open__button {
+  @include absolute-position(13px, 80px, auto, auto);
+  background: url('../../../assets/img/book.png') no-repeat;
+  background-size: cover;
+}
+
+.note__info {
+  @include flex-column-justify-content(center);
+  @include size(70%, 80%);
+  flex-wrap: wrap;
+  margin: auto;
+
+  .note__title {
+    font-weight: bold;
+    width: 100%;
+  }
+}
+
+.note__text {
+  @include textarea-size();
+}

@@ -7,7 +7,8 @@ import ForgotPasswordForm from '../../containers/ForgotPasswordContainer';
 import VerifyForm from '../../containers/VerifyFormContainer';
 import Notification from '../../containers/NotificationsContainer';
 import ResetPasswordForm from '../../containers/ResetPasswordContainer';
-import ProfileForm from '../../containers/ProfileContainer';
+import ProfileSettings from '../../containers/ProfileSettingsContainer';
+import Notes from '../../containers/NotesContainer';
 import PrivateRoute from '../shared/PrivateRoute';
 import Loader from '../shared/Loader';
 import { IAppProps } from './interfaces';
@@ -38,7 +39,9 @@ function App(props : IAppProps) {
           <Route exact path='/signUp' component={SignUpForm}/>
           <Route exact path='/signUp/verify' component={VerifyForm}/> 
           {/* settings routes */}
-          <PrivateRoute errors={isErrors} loaded={isLoaded} exact path='/settings' component={ProfileForm}/> 
+          <PrivateRoute errors={isErrors} loaded={isLoaded} exact path='/settings' component={ProfileSettings}/> 
+
+          <PrivateRoute errors={isErrors} loaded={isLoaded} exact path='/notes' component={Notes}/> 
         </Switch>
       </Router>
       <Notification /> 

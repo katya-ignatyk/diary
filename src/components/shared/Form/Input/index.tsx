@@ -15,7 +15,7 @@ interface IInputProps {
 function Input(props : IInputProps) {
   const { text, name, id, type, value, onChange } = props;
   return (
-    <div className={styles['form-group']}>
+    <>
       <label className={styles['form-group__label']} htmlFor={id}>{text}
         <input
           id={id}
@@ -26,7 +26,7 @@ function Input(props : IInputProps) {
           value={value}
         />
       </label>
-    </div>
+    </>
   );
 }
 

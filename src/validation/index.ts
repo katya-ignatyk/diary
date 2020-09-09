@@ -37,3 +37,15 @@ export function profileValidationSchema() {
       .test('is-correct-name', 'Name is invalid', value => /^[a-zA-Z ]+$/.test(value)),
   });
 }
+
+export function noteValidationSchema() {
+
+  return Yup.object().shape({
+    title: Yup.string()
+      .required('Title is required')
+      .max(30),
+    text: Yup.string()
+      .required('Text is required')
+      .max(250)
+  });
+}

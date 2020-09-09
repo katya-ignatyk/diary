@@ -1,0 +1,16 @@
+@import '../../../scss/mixins/mixins.scss';
+
+.add__button {
+  @include size(50px,50px);
+  @include center-position(400px, 50px);
+  background: url('../../../assets/img/add.png') no-repeat;
+  background-size: cover;
+}
+
+.note__form {
+  @include flex-column-justify-content(center);
+
+  .note__text {
+    @include textarea-size();
+  }
+}

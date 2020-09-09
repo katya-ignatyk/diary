@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import diary from '../../../assets/img/diaryForSignIn.jpg';
-import linkStyles from '../../../scss/link/styles.css';
+import linkStyles from '../../../scss/common/link/styles.css';
 import Button from '../../../containers/ButtonContainer';
 import Input from '../../shared/Form/Input';
 import Error from '../../shared/Form/Error';
@@ -59,11 +59,11 @@ function SignInForm(props : IUserAuthReduxProps) {
         />
         <Error touched={touched.password} errors={errors.password}/>
 
-        <Link className={linkStyles.form__link} to='/forgotPassword'>Forgot password?</Link>
+        <Link className={linkStyles.link} to='/forgotPassword'>Forgot password?</Link>
 
         <Button text='Sign In'/>
         
-        <Link className={linkStyles.form__link} to='/signUp'>New to Diary?  Create an account!</Link>
+        <Link className={linkStyles.link} to='/signUp'>New to Diary?  Create an account!</Link>
     </Form>
   );
 }

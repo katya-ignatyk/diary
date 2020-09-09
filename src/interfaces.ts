@@ -1,8 +1,9 @@
 import { Action } from 'redux';
 import { INotificationState } from './redux/reducers/notifications/interfaces';
 import { ILoaderState } from './redux/reducers/loader/interfaces';
-import { IUserState } from 'redux/reducers/user/interfaces';
-import { IProfileState } from 'redux/reducers/profile/interfaces';
+import { IUserState } from './redux/reducers/user/interfaces';
+import { IProfileState } from './redux/reducers/profile/interfaces';
+import { INoteState } from './redux/reducers/notes/interfaces';
 
 export interface IAction<T, S> extends Action<T> {
   payload : S;
@@ -13,6 +14,7 @@ export interface IRootState {
   loader : ILoaderState;
   user : IUserState;
   profile : IProfileState;
+  notes : INoteState[];
 }
 
 export enum CustomErrors {

@@ -1,27 +1,26 @@
-.form-group {
+.form-group__label {
+  color: rgb(136, 124, 109);
+  cursor: pointer;
+  font-size: 18px;
+  margin: 5px 0;
 
-  .form-group__label {
-    color: rgb(136, 124, 109);
-    cursor: pointer;
-    font-size: 18px;
-    margin: 5px 0;
-
-    .form-group__input {
-      background-color: transparent;
-      border-color: rgb(129, 129, 129);
-      border-width: 0 0 2px;
-      color: rgb(153, 148, 148);
-      display: block;
-      font-size: 17px;
-      font-weight: bold;
-      margin: 10px;
-      outline: none;
-      padding: 12px 20px;
-
-      &[type='file'] {
-        cursor: pointer;
-        opacity: 0;
-      }
+  .form-group__input {
+    background-color: transparent;
+    border-color: rgb(129, 129, 129);
+    border-width: 0 0 2px;
+    color: rgb(153, 148, 148);
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 10px;
+    outline: none;
+    padding: 12px 20px;
+  
+    &[type='file'] {
+      cursor: pointer;
+      opacity: 0;
     }
   }
 }
+
+

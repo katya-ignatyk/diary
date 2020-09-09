@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import Avatar from '../components/settings/ProfileForm/Avatar';
+import Avatar from '../components/avatar';
 import { IRootState } from '../interfaces';
 import { deleteAvatar, updateAvatar } from '../redux/actions/profile';
 

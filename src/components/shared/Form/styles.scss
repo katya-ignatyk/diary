@@ -1,3 +1,5 @@
+@import '../../../scss/mixins/mixins.scss';
+
 .form__container {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   display: flex;
@@ -8,26 +10,21 @@
     flex-basis: 70%;
 
     .form__image {
-      height: 100%;
-      width: 100%;
+      @include size(100%, 100%);
     }
   }
 
   .form__wrapper {
+    @include flex-column-justify-content(space-around);
     background-color: rgb(247, 242, 238);
-    display: flex;
     flex-basis: 30%;
-    flex-direction: column;
-    justify-content: space-around;
 
     .form__title {
       text-align: center;
     }
 
     .form {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      @include flex-column-justify-content(space-between);
       margin: auto;
     }
   }

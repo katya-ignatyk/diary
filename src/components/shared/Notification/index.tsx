@@ -9,7 +9,7 @@ function Alert(props : AlertProps) {
 }
 
 const styles = (index : number) : React.CSSProperties => ({
-  position: 'absolute',
+  position: 'fixed',
   bottom: 50 * index + 'px',
   left: 0,
   transform: 'translateX(0%)',

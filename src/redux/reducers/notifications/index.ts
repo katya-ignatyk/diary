@@ -6,7 +6,7 @@ type INotificationAction = ActionType<typeof actions>
 
 const initialState : INotificationState[] = [];
 
-export default function NotificationReducer(state = initialState, action : INotificationAction) {
+export function notificationReducer(state = initialState, action : INotificationAction) {
   switch (action.type) {
     case NotificationsActionTypes.SEND_NOTIFICATION: {
       return [

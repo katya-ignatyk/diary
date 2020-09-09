@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import ProfileForm from '../components/settings/ProfileForm';
+import ProfileForm from '../components/settings/ProfileSettings';
 import { IRootState } from 'interfaces';
 import { updateProfile } from '../redux/actions/profile';
 import { IProfileData } from 'redux/actions/profile/interfaces';

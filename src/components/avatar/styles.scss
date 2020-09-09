@@ -1,6 +1,7 @@
+@import '../../scss//mixins/mixins.scss';
+
 .avatar__section {
-  display: flex;
-  flex-direction: column;
+  @include flex-column();
   margin: 20px 0;
 
   .button {
@@ -15,9 +16,8 @@
 }
 
 .file__input {
-  height: 0;
+  @include size(0, 0);
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  width: 0;
 }

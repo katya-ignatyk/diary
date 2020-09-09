@@ -1,6 +1,8 @@
-.form__link {
+@import '../../../scss/mixins/mixins.scss';
+
+.link {
+  @include reset-base-link();
   color: rgb(136, 124, 109);
-  display: block;
   margin: 10px 0;
 
   &:hover {

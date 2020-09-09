@@ -1,15 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import Button from '../../../containers/ButtonContainer';
+import Avatar from '../../../containers/AvatarContainer';
 import Error from '../../shared/Form/Error';
 import Input from '../../shared/Form/Input';
 import styles from './styles.css';
 import { profileValidationSchema } from '../../../validation';
 import { SettingsLayout } from '../../../layouts/SettingsLayout';
 import { IProfileReduxProps } from './interfaces';
-import Avatar from '../../../containers/AvatarContainer';
 
-function ProfileForm(props : IProfileReduxProps) {
+function ProfileSettingsForm(props : IProfileReduxProps) {
   const { 
       id, 
       girl_name, 
@@ -93,4 +93,4 @@ function ProfileForm(props : IProfileReduxProps) {
   );
 }
 
-export default ProfileForm;
+export default ProfileSettingsForm;

@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import newspaper from '../../../assets/img/newspaper.jpg';
-import linkStyles from '../../../scss/link/styles.css';
+import linkStyles from '../../../scss/common/link/styles.css';
 import Button from '../../../containers/ButtonContainer';
 import Input from '../../shared/Form/Input';
 import Error from '../../shared/Form/Error';
@@ -43,7 +43,7 @@ function ForgotPasswordForm(props : IForgotPasswordReduxProps) {
       
       <Button text='Send email'/>
 
-      <Link className={linkStyles.form__link} to='/signIn'>Back to sign in</Link>
+      <Link className={linkStyles.link} to='/signIn'>Back to sign in</Link>
     </Form>
   );
 }

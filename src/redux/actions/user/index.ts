@@ -1,6 +1,5 @@
 import { Dispatch } from 'redux';
-import { UserService } from '../../../services/userService';
-import { StorageService } from '../../../services/storageService';
+import { StorageService, UserService } from '../../../services';
 import { IUserRegistrationData } from './interfaces';
 import { IUserAuthData } from './interfaces';
 import { UserActionTypes } from '../../reducers/user/interfaces';
@@ -218,7 +217,6 @@ export const fetchUser = () => async(dispatch : Dispatch) => {
     dispatch(stopLoader());
 
   } catch (error) {
-    console.log(error);
 
     if (error.response.data.code === CustomErrors.ACCESS_EXPIRED) {
 
