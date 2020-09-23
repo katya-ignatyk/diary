@@ -3,11 +3,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => {
-  const PRODUCTION = argv.mode ? argv.mode === 'production' : process.env.NODE_ENV === 'production';
+  const PRODUCTION = argv.mode ? 
+                    argv.mode === 'production' : 
+                    process.env.NODE_ENV === 'production';
 
   return {
     entry: './src/index.tsx',
-    mode: PRODUCTION ? 'production' : 'development',
+    mode: PRODUCTION ? 
+          'production' : 
+          'development',
 
     output: {
       filename: 'main.js',
@@ -37,9 +41,16 @@ module.exports = (env, argv) => {
           enforce: 'pre',
         },
         {
+          test: /\.global\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
           test: /\.(sa|sc|c)ss$/,
+          exclude: /\.global.css$/i,
           use: [
-            PRODUCTION ? MiniCssExtractPlugin.loader : 'style-loader',
+            PRODUCTION ? 
+            MiniCssExtractPlugin.loader : 
+            'style-loader',
             '@teamsupercell/typings-for-css-modules-loader',
             {
               loader: 'css-loader',
@@ -53,7 +64,7 @@ module.exports = (env, argv) => {
           ],
         },
         {
-          test: /\.(png|gif|jpe?g)$/,
+          test: /\.(png|gif|jpe?g|svg)$/,
           use: [
             {
               loader: 'file-loader',
@@ -69,8 +80,12 @@ module.exports = (env, argv) => {
 
     plugins: [
       new MiniCssExtractPlugin({
-        filename: PRODUCTION ? '[name].[hash].css' : '[name].css',
-        chunkFilename: PRODUCTION ? '[id].[hash].css' : '[id].css',
+        filename: PRODUCTION ? 
+                  '[name].[hash].css' : 
+                  '[name].css',
+        chunkFilename: PRODUCTION ? 
+                      '[id].[hash].css' : 
+                      '[id].css',
       }),
       new HtmlWebpackPlugin({
         template: __dirname + '/src/index.html',

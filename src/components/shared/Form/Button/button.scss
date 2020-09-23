@@ -1,0 +1,23 @@
+@import '../../../../scss/mixins/mixins.scss';
+
+.form__button {
+  @include reset-base-button();
+  background-color: transparent;
+  border: 1px solid rgb(129, 129, 129);
+  border-radius: 5px;
+  box-shadow: 0  17px 10px -10px rgba(0, 0, 0, 0.4);
+  color: rgb(136, 124, 109);
+  font-weight: bold;
+  margin: 10px auto;
+  overflow: hidden;
+  padding: 7px;
+  transition: all ease-in-out 300ms;
+  width: 200px;
+
+  &:hover {
+    background-color: rgb(136, 124, 109);
+    box-shadow: 0  37px 20px 5px rgba(0, 0, 0, 0.2);
+    color: rgb(255, 255, 255);
+    transform: translate(0, -5px);
+  }
+}

@@ -1,0 +1,67 @@
+@import '../../../scss/mixins/mixins.scss';
+
+.header {
+  @include flex-row-justify-content(space-around);
+  @include size(10vh, auto);
+  background: rgb(226, 215, 205);
+  box-shadow: 0 14px 28px rgba(95, 84, 84, 0.25), 0 10px 10px rgba(182, 167, 167, 0.22);
+  flex-grow: 0;
+  margin-bottom: 40px;
+  padding: 10px;
+
+  .menu {
+    display: flex;
+
+    &__item {
+      list-style-type: none;
+    }
+  }
+  
+  .dropdown {
+    min-width: 100px;
+    position: relative;
+    
+    &__toggle {
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    &__menu {
+      animation: menuDrop 0.5s ease-in-out;
+      background-color: #fff;
+      border-radius: 6px;
+      margin: 6px 0;
+      padding: 5px;
+      transform-origin: 0% 0%;
+
+      &__item {
+        list-style: none;
+        padding: 7px;
+      }
+
+      &::before {
+        @include size(0, 0);
+        @include absolute-position(100px, 0, 0, 37px);
+        border-bottom: 10px solid #fff;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        content: '';
+        display: block;
+      }
+    }
+  } 
+}
+
+@keyframes menuDrop {
+
+  from { transform: scaleY(0);}
+
+  to { transform: scaleY(1);}
+}
+

@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
-import NotificationReducer from './notifications';
-import LoaderReducer from './loader';
+import { notificationReducer } from './notifications';
+import { loaderReducer } from './loader';
 import { userReducer } from './user';
+import { profileReducer } from './profile';
+import { notesReducer } from './notes';
 
 const reducers = combineReducers({
-  notifications: NotificationReducer,
-  loader: LoaderReducer,
-  user: userReducer
+  notifications: notificationReducer,
+  loader: loaderReducer,
+  user: userReducer,
+  profile: profileReducer,
+  notes: notesReducer
 });
 
 export default reducers;

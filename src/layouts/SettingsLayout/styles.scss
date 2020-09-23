@@ -1,0 +1,22 @@
+.settings__container {
+  background: rgb(231, 226, 226);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  display: flex;
+  margin: auto;
+  padding: 30px;
+  width: 70%;
+
+  .menu {
+    border-right: 1px solid rgb(180, 173, 173);
+    flex-basis: 25%;
+  }
+
+  .settings {
+    display: flex;
+    flex-basis: 75%;
+    justify-content: space-around;
+    position: relative;
+  }
+  
+}
+

@@ -1,44 +1,43 @@
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { CustomErrors } from '../interfaces';
+
 export class HttpService {
-  public static post<T>(url : string, body : T) {
-    return this.sendRequest(url, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  public static get<T>(url : string, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
+    return this.sendRequest<T>({
+      url,
+      method: 'get',
+      ...options,
     });
   }
 
-  public static get<T>(url : string, body : T) {
-    return this.sendRequest(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  public static post<T, P>(url : string, data ?: P, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
+    return this.sendRequest<T>({
+      url,
+      method: 'post',
+      data,
+      ...options,
     });
   }
 
-  public static put<T>(url : string, body : T) {
-    return this.sendRequest(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body
+  public static put<T, P>(url : string, data ?: P, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
+    return this.sendRequest<T>({
+      url,
+      method: 'put',
+      data,
+      ...options,
     });
   }
 
-  public static delete<T>(url : string, body : T) {
-    return this.sendRequest(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body
+  public static delete<T, P>(url : string, data ?: P, options ?: AxiosRequestConfig) : Promise<AxiosResponse<T>> {
+    return this.sendRequest<T>({
+      url,
+      method: 'delete',
+      data,
+      ...options,
     });
   }
 
-  private static sendRequest<T>(url : string, body : T) {
-    return fetch(url, body);
+  private static sendRequest<T>(config : AxiosRequestConfig) : Promise<AxiosResponse<T>> {
+    return axios.request({ ...config });
   }
 }

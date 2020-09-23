@@ -8,7 +8,7 @@ const initialState = {
   isLoaderActive: false
 };
 
-export default function LoaderReducer(state = initialState, action : ILoader) {
+export function loaderReducer(state = initialState, action : ILoader) {
   switch (action.type) {
     case LoaderActionTypes.START_LOADER: {
       return {

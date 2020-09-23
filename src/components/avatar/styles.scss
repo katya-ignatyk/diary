@@ -1,0 +1,23 @@
+@import '../../scss//mixins/mixins.scss';
+
+.avatar__section {
+  @include flex-column();
+  margin: 20px 0;
+
+  .button {
+    background-color: transparent;
+    border: 0;
+    color: rgb(131, 123, 112);
+    cursor: pointer;
+    outline: none;
+    text-decoration: underline;
+  }
+  
+}
+
+.file__input {
+  @include size(0, 0);
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+}

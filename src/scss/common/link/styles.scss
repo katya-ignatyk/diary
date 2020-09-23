@@ -1,0 +1,11 @@
+@import '../../../scss/mixins/mixins.scss';
+
+.link {
+  @include reset-base-link();
+  color: rgb(136, 124, 109);
+  margin: 10px 0;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.25);
+  }
+}
